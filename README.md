@@ -4,7 +4,7 @@
 
 The Ailevate AMI Agent Creator Simulation is an interactive web-based application designed to demonstrate the process of configuring and deploying specialized AI agents using the Adaptive Machine Intelligence (AMI) framework. This simulation allows users to explore the creation of AI agents with customized capabilities, knowledge bases, and adaptive learning configurations.
 
-![Ailevate AMI Agent Creator](assets/images/index_image.png)
+![Ailevate AMI Agent Creator](index_image.png)
 
 ## Purpose
 
