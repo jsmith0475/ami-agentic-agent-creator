@@ -457,7 +457,7 @@ pricing:
         if (!agentPreview) return;
 
         // Get agent name
-        const agentName = document.getElementById('agentName').value || 'AMI Agent';
+        const agentName = document.getElementById('agentName').value || 'AMI Agentic Agent';
         
         // Get selected capabilities to determine response type
         const capabilities = [];
@@ -557,7 +557,7 @@ pricing:
         }
         
         // Get agent name and goals
-        const agentName = document.getElementById('agentName')?.value || 'AMI Agent';
+        const agentName = document.getElementById('agentName')?.value || 'AMI Agentic Agent';
         const primaryGoal = document.getElementById('primaryGoal')?.value || 'Improve performance metrics';
         
         let capabilities = [];

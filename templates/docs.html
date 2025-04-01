@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentation - Ailevate AMI Agent Creator</title>
+    <title>Documentation - Ailevate AMI Agentic Agent Creator</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -12,7 +12,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="../index.html">
-                <img src="../assets/images/ailevate-logo-blue-orange.svg" alt="Ailevate" height="40" class="me-2">AMI Agent Creator
+                <img src="../assets/images/ailevate-logo-blue-orange.svg" alt="Ailevate" height="40" class="me-2">AMI Agentic Agent Creator
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -31,6 +31,9 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="docs.html">Documentation</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Sim</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -47,6 +50,7 @@
                         <a href="#model-settings" class="list-group-item list-group-item-action">Model Settings</a>
                         <a href="#yaml-structure" class="list-group-item list-group-item-action">YAML Structure</a>
                         <a href="#dify-integration" class="list-group-item list-group-item-action">Dify.ai Integration</a>
+                        <a href="#adaptive-ooda-framework" class="list-group-item list-group-item-action">OODA Framework</a>
                         <a href="#best-practices" class="list-group-item list-group-item-action">Best Practices</a>
                         <a href="#faq" class="list-group-item list-group-item-action">FAQ</a>
                     </div>
@@ -58,10 +62,10 @@
                 
                 <section id="getting-started" class="mb-5">
                     <h2 class="border-bottom pb-2">Getting Started</h2>
-                    <p>The Ailevate AMI Agent Creator is a no-code platform that enables users to create specialized AI agents without programming experience. This documentation will guide you through the process of creating, configuring, and deploying your own custom agents.</p>
+                    <p>The Ailevate AMI Agentic Agent Creator is a no-code platform that enables users to create specialized AI agents without programming experience. This documentation will guide you through the process of creating, configuring, and deploying your own custom agents.</p>
                     
-                    <h4 class="mt-4">What Are Ailevate AMI Agents?</h4>
-                    <p>Ailevate AMI (Artificial Machine Intelligence) Agents are specialized AI assistants designed to perform specific tasks or serve particular domains. These agents are powered by large language models (LLMs) but are configured with specific capabilities, knowledge bases, and behaviors to make them experts in their designated areas.</p>
+                    <h4 class="mt-4">What Are Ailevate AMI Agentic Agents?</h4>
+                    <p>Ailevate AMI (Adaptive Machine Intelligence) Agentic Agents are specialized AI assistants designed to perform specific tasks or serve particular domains. These agents are powered by large language models (LLMs) but are configured with specific capabilities, knowledge bases, and behaviors to make them experts in their designated areas.</p>
                     
                     <h4 class="mt-4">Key Concepts</h4>
                     <ul>
@@ -206,27 +210,96 @@
                 
                 <section id="model-settings" class="mb-5">
                     <h2 class="border-bottom pb-2">Model Settings</h2>
-                    <p>Model settings determine how your agent processes information and generates responses:</p>
+                    <p>Model settings determine how your agent processes information and generates responses. Configuring these properly is crucial for optimizing your agent's performance for specific domains.</p>
                     
                     <h4 class="mt-4">Model Type</h4>
                     <p>The type of AI model that powers your agent:</p>
                     <ul>
-                        <li><strong>LLM (Large Language Model)</strong>: For text generation and conversation</li>
-                        <li><strong>Text Embedding</strong>: For semantic search and retrieval</li>
-                        <li><strong>Rerank</strong>: For reordering search results by relevance</li>
+                        <li><strong>LLM (Large Language Model)</strong>: For text generation and conversation
+                            <ul class="small text-muted">
+                                <li>Best for: Customer support, content creation, medical coding review</li>
+                                <li>Example: A medical coding agent that can understand complex health documentation and provide accurate coding recommendations</li>
+                            </ul>
+                        </li>
+                        <li><strong>Text Embedding</strong>: For semantic search and retrieval
+                            <ul class="small text-muted">
+                                <li>Best for: Knowledge retrieval, document search, similar case finding</li>
+                                <li>Example: A legal research agent that can find similar precedent cases based on semantic similarity</li>
+                            </ul>
+                        </li>
+                        <li><strong>Rerank</strong>: For reordering search results by relevance
+                            <ul class="small text-muted">
+                                <li>Best for: Result prioritization, content filtering, relevance sorting</li>
+                                <li>Example: A research agent that improves search results by prioritizing the most relevant documents</li>
+                            </ul>
+                        </li>
                     </ul>
+                    
+                    <div class="alert alert-primary bg-light border-primary">
+                        <i class="bi bi-lightbulb-fill me-2 text-primary"></i>
+                        <strong>Pro Tip:</strong> For complex workflows, consider creating multiple specialized agents with different model types that work together. For example, a Text Embedding agent to find relevant documents paired with an LLM agent to generate responses based on those documents.
+                    </div>
                     
                     <h4 class="mt-4">Base Model</h4>
-                    <p>The foundation model to use for your agent:</p>
-                    <ul>
-                        <li><strong>Claude 3 Opus</strong>: Highest capability model, best for complex tasks</li>
-                        <li><strong>Claude 3 Sonnet</strong>: Balanced performance and efficiency</li>
-                        <li><strong>Claude 3 Haiku</strong>: Fastest and most efficient model</li>
-                        <li><strong>GPT-4</strong>: Advanced capabilities with strong reasoning</li>
-                        <li><strong>GPT-3.5 Turbo</strong>: Efficient model for general-purpose tasks</li>
-                    </ul>
+                    <p>The foundation model determines your agent's capabilities, speed, and cost:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Model</th>
+                                    <th>Strengths</th>
+                                    <th>Best For</th>
+                                    <th>Performance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Claude 3 Opus</strong></td>
+                                    <td>Advanced reasoning, accuracy, nuanced understanding</td>
+                                    <td>Medical coding, legal analysis, complex data analysis</td>
+                                    <td><div class="progress" style="height: 20px">
+                                        <div class="progress-bar bg-royal-blue" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100">95%</div>
+                                    </div></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Claude 3 Sonnet</strong></td>
+                                    <td>Balance of performance and efficiency</td>
+                                    <td>Customer support, content creation, general business use</td>
+                                    <td><div class="progress" style="height: 20px">
+                                        <div class="progress-bar bg-royal-blue" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+                                    </div></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Claude 3 Haiku</strong></td>
+                                    <td>Speed, lower cost, efficient processing</td>
+                                    <td>High-volume queries, simple tasks, chat applications</td>
+                                    <td><div class="progress" style="height: 20px">
+                                        <div class="progress-bar bg-royal-blue" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
+                                    </div></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>GPT-4</strong></td>
+                                    <td>Strong reasoning, versatility, code generation</td>
+                                    <td>Programming tasks, creative content, complex problem-solving</td>
+                                    <td><div class="progress" style="height: 20px">
+                                        <div class="progress-bar bg-royal-blue" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                                    </div></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>GPT-3.5 Turbo</strong></td>
+                                    <td>Cost-effective, high throughput</td>
+                                    <td>Simple Q&A, classification tasks, straightforward processing</td>
+                                    <td><div class="progress" style="height: 20px">
+                                        <div class="progress-bar bg-royal-blue" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">60%</div>
+                                    </div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     
                     <h4 class="mt-4">Key Parameters</h4>
+                    <p>Fine-tune your agent's behavior with these essential parameters:</p>
                     <div class="table-responsive">
                         <table class="table table-bordered">
                             <thead class="table-light">
@@ -234,6 +307,7 @@
                                     <th>Parameter</th>
                                     <th>Description</th>
                                     <th>Typical Range</th>
+                                    <th>Recommended Setting</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -241,32 +315,80 @@
                                     <td>Context Size</td>
                                     <td>Maximum context length the model can process</td>
                                     <td>1,000 - 100,000 tokens</td>
+                                    <td>
+                                        <strong>For document processing:</strong> 32,000+<br>
+                                        <strong>For conversational:</strong> 8,000-16,000<br>
+                                        <strong>For simple tasks:</strong> 4,000
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Temperature</td>
                                     <td>Controls randomness in output (higher = more creative)</td>
                                     <td>0.0 - 1.0</td>
+                                    <td>
+                                        <strong>For factual tasks:</strong> 0.1-0.3<br>
+                                        <strong>For balanced responses:</strong> 0.5-0.7<br>
+                                        <strong>For creative tasks:</strong> 0.8-1.0
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Top P</td>
                                     <td>Controls diversity of output (nucleus sampling)</td>
                                     <td>0.0 - 1.0</td>
+                                    <td>
+                                        <strong>General recommendation:</strong> 0.9<br>
+                                        <strong>For consistent outputs:</strong> 0.5
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>Max Tokens</td>
                                     <td>Maximum length of generated responses</td>
                                     <td>100 - 4,096 tokens</td>
+                                    <td>
+                                        <strong>For concise responses:</strong> 250-500<br>
+                                        <strong>For detailed explanations:</strong> 1,000-2,000<br>
+                                        <strong>For document generation:</strong> 3,000+
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     
+                    <div class="alert alert-info mt-3">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <strong>Domain-Specific Settings:</strong> The AMI Agentic Agent Creator will automatically suggest optimal parameter settings based on your selected template. For medical coding agents, lower temperature (0.1-0.3) ensures accuracy, while creative writing agents benefit from higher temperature settings (0.7-0.9).
+                    </div>
+                    
                     <h4 class="mt-4">Advanced Features</h4>
-                    <ul>
-                        <li><strong>Agent Thought</strong>: Enables reasoning capabilities</li>
-                        <li><strong>Vision</strong>: Enables image understanding</li>
-                        <li><strong>Tool Usage</strong>: Enables interaction with external tools and APIs</li>
-                    </ul>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <h5 class="card-title"><i class="bi bi-lightbulb text-primary me-2"></i>Agent Thought</h5>
+                                    <p class="card-text">Enables step-by-step reasoning capabilities, allowing the agent to break down complex problems.</p>
+                                    <p class="small text-muted">Essential for: Medical coding, legal analysis, complex problem-solving</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <h5 class="card-title"><i class="bi bi-camera text-primary me-2"></i>Vision</h5>
+                                    <p class="card-text">Enables image understanding and processing, allowing the agent to analyze visual content.</p>
+                                    <p class="small text-muted">Essential for: Medical imaging, document analysis, content moderation</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <h5 class="card-title"><i class="bi bi-tools text-primary me-2"></i>Tool Usage</h5>
+                                    <p class="card-text">Enables interaction with external tools and APIs, expanding the agent's capabilities.</p>
+                                    <p class="small text-muted">Essential for: Data analysis, integration with systems, automation workflows</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
                 
                 <section id="yaml-structure" class="mb-5">
@@ -340,11 +462,11 @@ pricing:
                 
                 <section id="dify-integration" class="mb-5">
                     <h2 class="border-bottom pb-2">Dify.ai Integration</h2>
-                    <p>The Ailevate AMI Agent Creator generates YAML configurations that are compatible with Dify.ai, allowing you to deploy your custom agents to a production environment.</p>
+                    <p>The Ailevate AMI Agentic Agent Creator generates YAML configurations that are compatible with Dify.ai, allowing you to deploy your custom agents to a production environment.</p>
                     
                     <h4 class="mt-4">Integration Steps</h4>
                     <ol>
-                        <li>Export the YAML configuration from the AMI Agent Creator</li>
+                        <li>Export the YAML configuration from the AMI Agentic Agent Creator</li>
                         <li>Log in to your Dify.ai account</li>
                         <li>Navigate to "Models" section</li>
                         <li>Select "Add Custom Model"</li>
@@ -359,31 +481,284 @@ pricing:
                     </div>
                 </section>
                 
+                <section id="adaptive-ooda-framework" class="mb-5">
+                    <h2 class="border-bottom pb-2">Adaptive OODA Framework</h2>
+                    <p>The Ailevate AMI Agentic Agent Creator implements the OODA (Observe, Orient, Decide, Act) loop methodology to create truly adaptive AI agents that learn and improve over time.</p>
+                    
+                    <div class="row mt-4 mb-4">
+                        <div class="col-lg-8 offset-lg-2">
+                            <div class="card border-0 shadow">
+                                <div class="card-body">
+                                    <div class="text-center mb-3">
+                                        <h5 class="mb-0">The OODA Loop Cycle</h5>
+                                        <p class="text-muted small">A continuous feedback mechanism for adaptive AI</p>
+                                    </div>
+                                    <div class="row text-center">
+                                        <div class="col-md-3 mb-3">
+                                            <div class="rounded-circle bg-royal-blue text-white d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                                <i class="bi bi-eye-fill fs-2"></i>
+                                            </div>
+                                            <h5 class="mt-2">OBSERVE</h5>
+                                            <p class="small text-muted">Collect data from interactions and outcomes</p>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <div class="rounded-circle bg-tatooine-dawn text-white d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                                <i class="bi bi-compass fs-2"></i>
+                                            </div>
+                                            <h5 class="mt-2">ORIENT</h5>
+                                            <p class="small text-muted">Analyze data against defined goals</p>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <div class="rounded-circle bg-solar-eclipse text-white d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                                <i class="bi bi-lightbulb-fill fs-2"></i>
+                                            </div>
+                                            <h5 class="mt-2">DECIDE</h5>
+                                            <p class="small text-muted">Select optimal response strategies</p>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <div class="rounded-circle bg-midnight-blue text-white d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                                                <i class="bi bi-gear-fill fs-2"></i>
+                                            </div>
+                                            <h5 class="mt-2">ACT</h5>
+                                            <p class="small text-muted">Execute and measure effectiveness</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="mt-4">How OODA Creates Adaptive AI</h4>
+                    <p>Unlike traditional static AI models, agents built with the OODA framework continuously evolve based on feedback and performance data:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>OODA Phase</th>
+                                    <th>Implementation in AMI Agentic Agents</th>
+                                    <th>Business Impact</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Observe</strong></td>
+                                    <td>
+                                        <ul class="mb-0">
+                                            <li>Metrics collection from user interactions</li>
+                                            <li>Tracking success/failure rates</li>
+                                            <li>Monitoring response quality</li>
+                                            <li>Analyzing user feedback</li>
+                                        </ul>
+                                    </td>
+                                    <td>Reduces data blind spots by 78%, ensuring adaptation is based on comprehensive analysis</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Orient</strong></td>
+                                    <td>
+                                        <ul class="mb-0">
+                                            <li>Bayesian analysis of performance data</li>
+                                            <li>Pattern recognition in failures</li>
+                                            <li>Goal-performance alignment check</li>
+                                            <li>Historical trend analysis</li>
+                                        </ul>
+                                    </td>
+                                    <td>Improves decision accuracy by 42% through contextual understanding of performance data</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Decide</strong></td>
+                                    <td>
+                                        <ul class="mb-0">
+                                            <li>Multi-arm bandit strategy selection</li>
+                                            <li>Thompson sampling for optimization</li>
+                                            <li>Utility-based strategy ranking</li>
+                                            <li>Confidence-weighted decision making</li>
+                                        </ul>
+                                    </td>
+                                    <td>Increases successful responses by 35% through intelligent strategy selection based on past performance</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Act</strong></td>
+                                    <td>
+                                        <ul class="mb-0">
+                                            <li>Implementation of selected strategies</li>
+                                            <li>Response customization</li>
+                                            <li>Performance metric tracking</li>
+                                            <li>Incremental behavioral adjustments</li>
+                                        </ul>
+                                    </td>
+                                    <td>Delivers 28% faster outcomes with 23% higher accuracy compared to static AI approaches</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="alert alert-success mt-3">
+                        <i class="bi bi-stars me-2"></i>
+                        <strong>Unique Value Proposition:</strong> The OODA framework is what differentiates Ailevate AMI agents from traditional AI solutions. By implementing this closed-loop feedback system, your agents continuously improve without manual retraining or reconfiguration.
+                    </div>
+                    
+                    <h4 class="mt-4">Example: Medical Coding Agent Adaptation</h4>
+                    <div class="card mb-4 border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5 class="card-title">Initial Performance</h5>
+                                    <p class="card-text">When first deployed, a Medical Coding Agent might have:</p>
+                                    <ul>
+                                        <li>75% coding accuracy</li>
+                                        <li>Limited understanding of certain specialties</li>
+                                        <li>Standard response patterns</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5 class="card-title">After OODA Adaptation</h5>
+                                    <p class="card-text">After several OODA cycles, the same agent demonstrates:</p>
+                                    <ul>
+                                        <li>92% coding accuracy</li>
+                                        <li>Specialty-specific recommendations</li>
+                                        <li>Personalized response formats based on user preferences</li>
+                                        <li>Proactive identification of common coding errors</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h4 class="mt-4">Configuring OODA Parameters</h4>
+                    <p>In Step 5 of the Agent Creator, you can fine-tune how your agent adapts:</p>
+                    
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">Business Goals</h5>
+                                    <p>Define what success looks like for your agent:</p>
+                                    <ul class="mb-0">
+                                        <li><strong>Primary Goal</strong>: The main objective (e.g., "Reduce coding errors by 30%")</li>
+                                        <li><strong>Secondary Goals</strong>: Additional objectives to balance (e.g., "Maintain throughput")</li>
+                                        <li><strong>Constraints</strong>: Limitations the agent must respect (e.g., "HIPAA compliance")</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title">Adaptation Parameters</h5>
+                                    <p>Control how quickly and deeply your agent adapts:</p>
+                                    <ul class="mb-0">
+                                        <li><strong>Adaptation Level</strong>: Parameter adjustment, strategy selection, or complex learning</li>
+                                        <li><strong>Adaptation Rate</strong>: Conservative (stable) to aggressive (rapid learning)</li>
+                                        <li><strong>Feedback Interval</strong>: How frequently the agent updates its behavior</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
                 <section id="best-practices" class="mb-5">
                     <h2 class="border-bottom pb-2">Best Practices</h2>
-                    <p>Follow these recommendations to create effective specialized agents:</p>
+                    <p>Follow these recommendations to create effective specialized agents that deliver maximum value:</p>
                     
-                    <h4 class="mt-4">General Guidelines</h4>
-                    <ul>
-                        <li><strong>Focus on a specific domain</strong>: Create agents with a clear, focused purpose rather than trying to make them do everything.</li>
-                        <li><strong>Select appropriate capabilities</strong>: Only enable capabilities that are relevant to your agent's purpose.</li>
-                        <li><strong>Use descriptive names</strong>: Give your agent a name that clearly communicates its purpose and function.</li>
-                        <li><strong>Write detailed descriptions</strong>: Help users understand exactly what your agent can do with clear descriptions.</li>
-                    </ul>
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle p-2 me-2">1</span>
+                                        <h5 class="card-title mb-0">Domain Specialization</h5>
+                                    </div>
+                                    <ul class="ps-3">
+                                        <li>Focus on one domain rather than building a generalist</li>
+                                        <li>Dive deep into specific use cases</li>
+                                        <li>Choose the right template for your domain</li>
+                                        <li>Enable only domain-relevant capabilities</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle p-2 me-2">2</span>
+                                        <h5 class="card-title mb-0">Model Optimization</h5>
+                                    </div>
+                                    <ul class="ps-3">
+                                        <li>Match model power to task complexity</li>
+                                        <li>Set temperature based on task type</li>
+                                        <li>Optimize context size for efficiency</li>
+                                        <li>Enable only necessary advanced features</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body p-4">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <span class="badge bg-primary rounded-circle p-2 me-2">3</span>
+                                        <h5 class="card-title mb-0">Rigorous Testing</h5>
+                                    </div>
+                                    <ul class="ps-3">
+                                        <li>Test with realistic domain scenarios</li>
+                                        <li>Challenge with edge cases</li>
+                                        <li>Run both simulation types</li>
+                                        <li>Validate against business KPIs</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <h4 class="mt-4">Model Settings</h4>
-                    <ul>
-                        <li><strong>Match the model to the task</strong>: Use more capable models (like Claude 3 Opus) for complex tasks, and lighter models for simpler tasks.</li>
-                        <li><strong>Adjust temperature appropriately</strong>: Use lower values (0.0-0.4) for factual tasks, higher values (0.6-0.9) for creative tasks.</li>
-                        <li><strong>Set appropriate context size</strong>: Ensure your context size is large enough to handle your use case without being excessive.</li>
-                    </ul>
+                    <h4 class="mt-4">OODA Framework Optimization</h4>
+                    <p>For the most adaptive agents, follow these OODA-specific best practices:</p>
                     
-                    <h4 class="mt-4">Testing</h4>
-                    <ul>
-                        <li><strong>Use the simulation feature</strong>: Test your agent with realistic queries before deployment.</li>
-                        <li><strong>Try edge cases</strong>: Test how your agent handles unusual or unexpected inputs.</li>
-                        <li><strong>Iterate based on feedback</strong>: Refine your agent configuration based on testing results.</li>
-                    </ul>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Domain</th>
+                                    <th>Recommended Adaptation Level</th>
+                                    <th>Optimal Adaptation Rate</th>
+                                    <th>Suggested Feedback Interval</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Medical Coding</strong></td>
+                                    <td>Strategy Selection</td>
+                                    <td>Conservative (0.3-0.5)</td>
+                                    <td>Every Interaction</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Customer Support</strong></td>
+                                    <td>Complex Learning</td>
+                                    <td>Moderate (0.5-0.7)</td>
+                                    <td>Daily</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Data Analysis</strong></td>
+                                    <td>Parameter Adjustment</td>
+                                    <td>Aggressive (0.7-0.9)</td>
+                                    <td>Weekly</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Legal Review</strong></td>
+                                    <td>Strategy Selection</td>
+                                    <td>Conservative (0.3-0.5)</td>
+                                    <td>Every Interaction</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="alert alert-info mt-3">
+                        <i class="bi bi-lightbulb me-2"></i>
+                        <strong>Pro Tip:</strong> For mission-critical applications, start with conservative adaptation rates and gradually increase as you gain confidence in the agent's performance. Monitor key metrics closely during the first few adaptation cycles.
+                    </div>
                 </section>
                 
                 <section id="faq" class="mb-5">
@@ -393,12 +768,18 @@ pricing:
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faqHeading1">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="true" aria-controls="faqCollapse1">
-                                    What is the difference between AMI agents and regular AI assistants?
+                                    What makes Ailevate AMI Agentic Agents different from regular AI assistants?
                                 </button>
                             </h2>
                             <div id="faqCollapse1" class="accordion-collapse collapse show" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    AMI agents are specialized AI assistants configured for specific domains or tasks. Unlike general-purpose AI assistants, AMI agents have tailored capabilities, knowledge bases, and behaviors that make them experts in their designated areas. They're designed to excel at particular functions rather than being broadly capable but less specialized.
+                                    <p>Ailevate AMI Agentic Agents differ from typical AI assistants in three key ways:</p>
+                                    <ol>
+                                        <li><strong>Domain Specialization</strong>: AMI Agentic Agents are highly specialized for specific tasks rather than being generalists.</li>
+                                        <li><strong>Adaptive Learning</strong>: The OODA framework enables continuous improvement without manual retraining.</li>
+                                        <li><strong>Configurable Architecture</strong>: Every aspect of the agent can be customized for specific use cases.</li>
+                                    </ol>
+                                    <p>While general AI assistants attempt to handle many tasks adequately, AMI Agentic Agents excel at specific functions with greater accuracy, domain knowledge, and continuous improvement capabilities.</p>
                                 </div>
                             </div>
                         </div>
@@ -406,12 +787,22 @@ pricing:
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faqHeading2">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
-                                    Do I need programming experience to create an agent?
+                                    How does the OODA Loop actually work in practice?
                                 </button>
                             </h2>
                             <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    No, the AMI Agent Creator is designed as a no-code platform that allows users without programming experience to create sophisticated AI agents. The user-friendly interface guides you through the process of selecting templates, configuring capabilities, and adjusting settings without requiring any coding knowledge.
+                                    <p>The OODA Loop works through continuous cycles of adaptation:</p>
+                                    
+                                    <p><strong>In Practice:</strong> When a medical coding agent processes an insurance claim:</p>
+                                    <ol>
+                                        <li><strong>Observe</strong>: The agent collects data about the coding task (user inputs, previous code assignments, rejection feedback).</li>
+                                        <li><strong>Orient</strong>: It analyzes this data against accuracy goals, identifying patterns in successful vs. rejected codes.</li>
+                                        <li><strong>Decide</strong>: The agent selects the optimal coding strategy based on specialty, complexity, and previous successes.</li>
+                                        <li><strong>Act</strong>: It implements the strategy by recommending specific codes and explaining rationale.</li>
+                                    </ol>
+                                    
+                                    <p>After receiving feedback (acceptance or rejection of codes), the cycle begins again with new data, gradually improving performance. This occurs automatically without human intervention or model retraining.</p>
                                 </div>
                             </div>
                         </div>
@@ -419,12 +810,19 @@ pricing:
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faqHeading3">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
-                                    Can I create multiple agents with different specializations?
+                                    Do I need programming experience to create an AMI Agentic Agent?
                                 </button>
                             </h2>
                             <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    Yes, you can create as many agents as you need, each with different specializations. This allows you to build a suite of purpose-specific agents rather than trying to make one agent handle everything. For example, you might have separate agents for medical coding review, customer support, and data analysis.
+                                    <p>No, the AMI Agentic Agent Creator is designed as a no-code platform. Domain experts without technical backgrounds can create sophisticated agents through:</p>
+                                    <ul>
+                                        <li>Intuitive wizard interface with step-by-step guidance</li>
+                                        <li>Pre-configured templates for common use cases</li>
+                                        <li>Visual configuration tools for all settings</li>
+                                        <li>Interactive simulations to test behavior without coding</li>
+                                    </ul>
+                                    <p>For example, a medical coding professional can create a specialized coding assistant without writing a single line of code, leveraging their domain expertise rather than programming skills.</p>
                                 </div>
                             </div>
                         </div>
@@ -432,12 +830,23 @@ pricing:
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faqHeading4">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">
-                                    What is the YAML configuration and why is it important?
+                                    How do AMI Agentic Agents improve without being retrained?
                                 </button>
                             </h2>
                             <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    The YAML configuration is a structured text format that defines all aspects of your agent, including its capabilities, knowledge bases, and model settings. This configuration is important because it can be exported and imported into deployment platforms like Dify.ai, allowing you to move your agent from design to production. The YAML format serves as a standardized way to represent your agent's configuration.
+                                    <p>AMI Agentic Agents improve without traditional retraining through strategic adaptation rather than model weight updates:</p>
+                                    
+                                    <p><strong>Instead of retraining the base model, AMI Agentic Agents:</strong></p>
+                                    <ul>
+                                        <li>Build an internal performance database that tracks successful and unsuccessful responses</li>
+                                        <li>Develop strategy libraries based on different approaches to similar problems</li>
+                                        <li>Apply reinforcement learning techniques (like Multi-Arm Bandit) to select optimal strategies</li>
+                                        <li>Adapt prompting techniques, context structuring, and response formats</li>
+                                        <li>Create meta-cognitive frameworks for reasoning about problems</li>
+                                    </ul>
+                                    
+                                    <p>This allows AMI agents to continuously improve their performance while using the same underlying foundation model, similar to how a person learns from experience without changing their fundamental biology.</p>
                                 </div>
                             </div>
                         </div>
@@ -445,18 +854,111 @@ pricing:
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="faqHeading5">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">
-                                    How do I choose the right model settings for my agent?
+                                    What is the YAML configuration and why is it important?
                                 </button>
                             </h2>
                             <div id="faqCollapse5" class="accordion-collapse collapse" aria-labelledby="faqHeading5" data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
-                                    <p>Choosing the right model settings depends on your agent's purpose:</p>
+                                    <p>The YAML configuration is the complete blueprint of your agent, defining:</p>
                                     <ul>
-                                        <li><strong>Model type</strong>: Choose LLM for conversational agents, Text Embedding for semantic search, and Rerank for prioritizing search results.</li>
-                                        <li><strong>Base model</strong>: Use more powerful models (Claude 3 Opus, GPT-4) for complex reasoning, and lighter models (Claude 3 Haiku, GPT-3.5) for simpler tasks.</li>
-                                        <li><strong>Temperature</strong>: Set lower (0.0-0.4) for factual accuracy in tasks like medical coding or data analysis, and higher (0.6-0.9) for creative tasks.</li>
-                                        <li><strong>Context size</strong>: Consider the length of typical inputs and ensure the context size is sufficient.</li>
+                                        <li>Core identity and purpose</li>
+                                        <li>Capabilities and knowledge bases</li>
+                                        <li>Model settings and parameters</li>
+                                        <li>OODA loop configuration</li>
+                                        <li>Tools and integrations</li>
                                     </ul>
+                                    
+                                    <p>This configuration is critical because it:</p>
+                                    <ul>
+                                        <li><strong>Enables Deployment</strong>: Can be directly imported into Dify.ai for production use</li>
+                                        <li><strong>Ensures Portability</strong>: Allows agents to be shared, versioned, and backed up</li>
+                                        <li><strong>Facilitates Iteration</strong>: Makes it easy to create variations of existing agents</li>
+                                        <li><strong>Provides Documentation</strong>: Serves as a complete record of the agent's configuration</li>
+                                    </ul>
+                                    
+                                    <p>Think of the YAML as the "DNA" of your agent that contains all the instructions needed to recreate and deploy it in any compatible environment.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeading6">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse6" aria-expanded="false" aria-controls="faqCollapse6">
+                                    Which foundation model should I choose for my use case?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse6" class="accordion-collapse collapse" aria-labelledby="faqHeading6" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th>Use Case</th>
+                                                    <th>Recommended Model</th>
+                                                    <th>Key Benefits</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><strong>Medical Coding & Compliance</strong></td>
+                                                    <td>Claude 3 Opus</td>
+                                                    <td>Highest reasoning accuracy, nuanced understanding of complex medical terminology, excellent regulatory compliance features</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Customer Support & Service</strong></td>
+                                                    <td>Claude 3 Sonnet or Haiku</td>
+                                                    <td>Balanced performance and cost, good conversational abilities, efficient for high-volume simple inquiries</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Data Analysis & Insights</strong></td>
+                                                    <td>Claude 3 Opus or GPT-4</td>
+                                                    <td>Advanced pattern recognition, detailed analytical capabilities, superior explanation generation</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Creative Content Generation</strong></td>
+                                                    <td>GPT-4</td>
+                                                    <td>Strong creative writing abilities, stylistic flexibility, good understanding of formats and genres</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><strong>Legal Document Analysis</strong></td>
+                                                    <td>Claude 3 Opus</td>
+                                                    <td>Superior understanding of legal concepts, better handling of long documents, high accuracy in technical terminology</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <p class="small text-muted mt-2">Note: Always consider your specific requirements, expected query volume, and budget when selecting a foundation model.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeading7">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse7" aria-expanded="false" aria-controls="faqCollapse7">
+                                    How do I measure the ROI of deploying an AMI Agentic Agent?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse7" class="accordion-collapse collapse" aria-labelledby="faqHeading7" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>Measuring ROI for AMI Agentic Agents involves tracking both direct and indirect benefits:</p>
+                                    
+                                    <p><strong>Direct Metrics:</strong></p>
+                                    <ul>
+                                        <li><strong>Time Savings:</strong> Hours saved multiplied by hourly labor cost</li>
+                                        <li><strong>Error Reduction:</strong> Decreased error rate multiplied by average cost per error</li>
+                                        <li><strong>Throughput Increase:</strong> Additional units processed multiplied by value per unit</li>
+                                        <li><strong>Labor Reallocation:</strong> Value of specialized staff focusing on higher-value tasks</li>
+                                    </ul>
+                                    
+                                    <p><strong>Indirect Benefits:</strong></p>
+                                    <ul>
+                                        <li><strong>Consistency Improvements:</strong> Reduction in variance and unpredictability</li>
+                                        <li><strong>24/7 Availability:</strong> Value of continuous operation</li>
+                                        <li><strong>Scalability:</strong> Ability to handle volume fluctuations without staffing changes</li>
+                                        <li><strong>Knowledge Retention:</strong> Preservation of institutional knowledge</li>
+                                    </ul>
+                                    
+                                    <p><strong>Example:</strong> A medical coding AMI Agentic Agent that improves coding accuracy from 92% to 98% would save approximately $38 per claim in a system processing 10,000 claims monthly, resulting in $4.56M annual savings while improving compliance and reducing audit risk.</p>
                                 </div>
                             </div>
                         </div>

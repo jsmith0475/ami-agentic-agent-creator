@@ -1,10 +1,10 @@
-# Ailevate AMI Agent Creator Simulation
+# Ailevate AMI Agentic Agent Creator Simulation
 
 ## Overview
 
-The Ailevate AMI Agent Creator Simulation is an interactive web-based application designed to demonstrate the process of configuring and deploying specialized AI agents using the Adaptive Machine Intelligence (AMI) framework. This simulation allows users to explore the creation of AI agents with customized capabilities, knowledge bases, and adaptive learning configurations.
+The Ailevate AMI Agentic Agent Creator Simulation is an interactive web-based application designed to demonstrate the process of configuring and deploying specialized AI agents using the Adaptive Machine Intelligence (AMI) framework. This simulation allows users to explore the creation of AI agents with customized capabilities, knowledge bases, and adaptive learning configurations.
 
-![Ailevate AMI Agent Creator](index_image.png)
+![Ailevate AMI Agentic Agent Creator](index_image.png)
 
 ## Purpose
 
@@ -234,6 +234,6 @@ To run the simulation:
 
 ## Conclusion
 
-The Ailevate AMI Agent Creator Simulation provides a visual and interactive demonstration of AI agent configuration with specialized capabilities. While currently a static simulation, it effectively illustrates the potential of configurable AI agents and the OODA loop methodology for adaptive intelligence.
+The Ailevate AMI Agentic Agent Creator Simulation provides a visual and interactive demonstration of AI agent configuration with specialized capabilities. While currently a static simulation, it effectively illustrates the potential of configurable AI agents and the OODA loop methodology for adaptive intelligence.
 
 As AI technology continues to evolve, this simulation framework can serve as a foundation for more advanced implementations that incorporate actual AI models, learning mechanisms, and deployment options.
