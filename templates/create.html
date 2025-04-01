@@ -1,0 +1,1693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Agent - Ailevate AMI Agent Creator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        /* Direct styling */
+        .agent-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        .agent-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-color: var(--primary-color);
+        }
+        .selected-card {
+            border: 2px solid var(--primary-color) !important;
+            background-color: rgba(31, 34, 162, 0.05) !important;
+            transform: translateY(-5px) !important;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+        .preview-message {
+            margin-bottom: 8px;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .user-message {
+            background-color: #e9f0ff;
+            text-align: right;
+        }
+        .agent-message {
+            background-color: #f0f0f0;
+        }
+        .system-message {
+            background-color: #f0f0f0;
+            border-left: 3px solid #6c757d;
+            color: #6c757d;
+            font-size: 0.85em;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlighted-capability {
+            background-color: rgba(31, 34, 162, 0.05);
+            border-left: 3px solid var(--primary-color);
+            padding-left: 0.5rem;
+            margin-left: -0.5rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .highlighted-capability .form-check-label {
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../assets/images/ailevate-logo-blue-orange.svg" alt="Ailevate" height="40" class="me-2">AMI Agent Creator
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="create.html">Create Agent</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="docs.html">Documentation</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="mb-4">Create Your Ailevate AMI Agent</h1>
+        
+        <div class="form-wizard">
+            <!-- Wizard Navigation -->
+            <ul class="nav nav-pills nav-justified mb-3" id="wizardNav">
+                <li class="nav-item">
+                    <a class="nav-link active" id="step1-tab" href="#step1">
+                        <span class="wizard-number">1</span> Choose Template
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="step2-tab" href="#step2">
+                        <span class="wizard-number">2</span> Basic Info
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="step3-tab" href="#step3">
+                        <span class="wizard-number">3</span> Capabilities
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="step4-tab" href="#step4">
+                        <span class="wizard-number">4</span> Settings
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="step5-tab" href="#step5">
+                        <span class="wizard-number">5</span> Goals & Evaluation
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="step6-tab" href="#step6">
+                        <span class="wizard-number">6</span> Preview & Export
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- Progress Bar -->
+            <div class="wizard-progress mb-4">
+                <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 16.67%" aria-valuenow="16.67" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+            
+            <!-- Wizard Content -->
+            <div class="tab-content" id="wizardContent">
+                <!-- Step 1: Template Selection -->
+                <div class="tab-pane fade show active wizard-pane" id="step1">
+                    <div class="wizard-content">
+                        <h3 class="mb-4">Choose a Starting Template</h3>
+                        <p class="text-muted mb-4">Select a pre-configured template or start from scratch to build your agent.</p>
+                        
+                        <div class="row g-4">
+                            <!-- Medical Coding Review Template -->
+                            <div class="col-md-6">
+                                <div class="card h-100 agent-card" id="medicalCodingCard" data-template-id="medical-coding">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <i class="bi bi-clipboard2-pulse fs-1 text-primary me-3"></i>
+                                            <h5 class="card-title mb-0">Medical Coding Review</h5>
+                                        </div>
+                                        <p class="card-text">An agent that reviews medical procedure and diagnostic codes for errors and compliance.</p>
+                                        <ul class="small text-muted">
+                                            <li>ICD-10 and CPT code validation</li>
+                                            <li>Code pairing accuracy checks</li>
+                                            <li>Reimbursement optimization</li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-footer bg-transparent">
+                                        <span class="badge bg-primary">Healthcare</span>
+                                        <span class="badge bg-secondary">Compliance</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Data Analysis Template -->
+                            <div class="col-md-6">
+                                <div class="card h-100 agent-card" id="dataAnalysisCard" data-template-id="data-analysis">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <i class="bi bi-bar-chart-line fs-1 text-primary me-3"></i>
+                                            <h5 class="card-title mb-0">Data Analysis</h5>
+                                        </div>
+                                        <p class="card-text">An agent that processes and analyzes data, presenting insights and visualizations.</p>
+                                        <ul class="small text-muted">
+                                            <li>Statistical analysis</li>
+                                            <li>Pattern recognition</li>
+                                            <li>Data visualization</li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-footer bg-transparent">
+                                        <span class="badge bg-primary">Analytics</span>
+                                        <span class="badge bg-secondary">Business Intelligence</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Customer Support Template -->
+                            <div class="col-md-6">
+                                <div class="card h-100 agent-card" id="customerSupportCard" data-template-id="customer-support">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <i class="bi bi-headset fs-1 text-primary me-3"></i>
+                                            <h5 class="card-title mb-0">Customer Support</h5>
+                                        </div>
+                                        <p class="card-text">An agent that handles customer inquiries and provides product support.</p>
+                                        <ul class="small text-muted">
+                                            <li>Product knowledge base</li>
+                                            <li>FAQ management</li>
+                                            <li>Ticket escalation</li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-footer bg-transparent">
+                                        <span class="badge bg-primary">Support</span>
+                                        <span class="badge bg-secondary">Customer Service</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Blank Template -->
+                            <div class="col-md-6">
+                                <div class="card h-100 agent-card" id="blankCard" data-template-id="blank">
+                                    <div class="card-body">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <i class="bi bi-file-earmark fs-1 text-primary me-3"></i>
+                                            <h5 class="card-title mb-0">Blank Template</h5>
+                                        </div>
+                                        <p class="card-text">Start from scratch and build a completely custom agent.</p>
+                                        <ul class="small text-muted">
+                                            <li>Full customization</li>
+                                            <li>No preset capabilities</li>
+                                            <li>For advanced users</li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-footer bg-transparent">
+                                        <span class="badge bg-primary">Custom</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                                
+                        <div class="alert alert-info mt-4" role="alert">
+                            <i class="bi bi-info-circle me-2"></i>
+                            Click on a template card above to select it, then proceed to the next step by clicking the Continue button below.
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mt-4">
+                            <a href="../index.html" class="btn btn-outline-secondary">Cancel</a>
+                            <button id="step1ContinueBtn" class="btn btn-secondary" disabled>Continue</button>
+                        </div>
+                        
+                        <input type="hidden" id="selectedTemplate" value="">
+                    </div>
+                </div>
+                
+                <!-- Step 2: Basic Information -->
+                <div class="tab-pane fade wizard-pane" id="step2">
+                    <div class="wizard-content">
+                        <h3 class="mb-4">Basic Information</h3>
+                        <p class="text-muted mb-4">Define your agent's identity and purpose.</p>
+                        
+                        <form>
+                            <div class="mb-3">
+                                <label for="agentName" class="form-label">Agent Name</label>
+                                <input type="text" class="form-control" id="agentName" placeholder="e.g., Medical Coding Review Agent">
+                                <div class="form-text">This will be displayed to users interacting with your agent.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="agentDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="agentDescription" rows="4" placeholder="Describe what your agent does and its primary purpose..."></textarea>
+                                <div class="form-text">Clearly explain your agent's capabilities and intended use cases.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Category</label>
+                                <select class="form-select" id="agentCategory">
+                                    <option value="healthcare">Healthcare</option>
+                                    <option value="customer-service">Customer Service</option>
+                                    <option value="analytics">Analytics</option>
+                                    <option value="education">Education</option>
+                                    <option value="productivity">Productivity</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </form>
+                        
+                        <div class="d-flex justify-content-between mt-4">
+                            <button class="btn btn-outline-secondary" id="backToStep1Btn">Back</button>
+                            <button class="btn btn-primary" id="goToStep3Btn">Continue</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 3: Capabilities -->
+                <div class="tab-pane fade wizard-pane" id="step3">
+                    <div class="wizard-content">
+                        <h3 class="mb-4">Agent Capabilities</h3>
+                        <p class="text-muted mb-4">Configure the specialized skills and knowledge your agent will have.</p>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Core Capabilities</h5>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="capabilityQA" name="capabilities" value="qa">
+                                    <label class="form-check-label" for="capabilityQA">
+                                        Question Answering
+                                        <div class="text-muted small">Respond to user queries from a knowledge base</div>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="capabilityMedicalCoding" name="capabilities" value="medical-coding">
+                                    <label class="form-check-label" for="capabilityMedicalCoding">
+                                        Medical Coding Analysis
+                                        <div class="text-muted small">Review and validate medical codes</div>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="capabilityDataAnalysis" name="capabilities" value="data-analysis">
+                                    <label class="form-check-label" for="capabilityDataAnalysis">
+                                        Data Analysis
+                                        <div class="text-muted small">Process and analyze datasets</div>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="capabilityDocSummarization" name="capabilities" value="document-summarization">
+                                    <label class="form-check-label" for="capabilityDocSummarization">
+                                        Document Summarization
+                                        <div class="text-muted small">Summarize documents and extract key information</div>
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Knowledge Base</h5>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="knowledgeICD10" name="knowledge" value="icd10">
+                                    <label class="form-check-label" for="knowledgeICD10">
+                                        ICD-10 Codes
+                                        <div class="text-muted small">International Classification of Diseases</div>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="knowledgeCPT" name="knowledge" value="cpt">
+                                    <label class="form-check-label" for="knowledgeCPT">
+                                        CPT Codes
+                                        <div class="text-muted small">Current Procedural Terminology</div>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="knowledgeProductInfo" name="knowledge" value="product-info">
+                                    <label class="form-check-label" for="knowledgeProductInfo">
+                                        Product Information
+                                        <div class="text-muted small">Product details, specifications, and FAQs</div>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-3">
+                                    <input class="form-check-input" type="checkbox" id="knowledgeStatistics" name="knowledge" value="statistics">
+                                    <label class="form-check-label" for="knowledgeStatistics">
+                                        Statistical Methods
+                                        <div class="text-muted small">Data analysis and statistical techniques</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info" role="alert">
+                            <i class="bi bi-info-circle me-2"></i>
+                            <span id="capabilitiesGuidance">The agent's capabilities determine how it will respond to user queries and what tasks it can perform.</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mt-4">
+                            <button class="btn btn-outline-secondary" id="backToStep2Btn">Back</button>
+                            <button class="btn btn-primary" id="goToStep4Btn">Continue</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 4: Settings -->
+                <div class="tab-pane fade wizard-pane" id="step4">
+                    <div class="wizard-content">
+                        <h3 class="mb-4">Model Settings</h3>
+                        <p class="text-muted mb-4">Configure the underlying model parameters for your agent.</p>
+                        
+                        <form>
+                            <div class="mb-3">
+                                <label for="modelType" class="form-label">Model Type</label>
+                                <select class="form-select" id="modelType">
+                                    <option value="llm" selected>Large Language Model (LLM)</option>
+                                    <option value="text-embedding">Text Embedding</option>
+                                    <option value="rerank">Rerank Model</option>
+                                </select>
+                                <div class="form-text">The type of AI model that powers your agent.</div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="baseModel" class="form-label">Base Model</label>
+                                <select class="form-select" id="baseModel">
+                                    <option value="claude-3-opus-20240229">Claude 3 Opus</option>
+                                    <option value="claude-3-sonnet-20240229" selected>Claude 3 Sonnet</option>
+                                    <option value="claude-3-haiku-20240307">Claude 3 Haiku</option>
+                                    <option value="gpt-4">GPT-4</option>
+                                    <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                                </select>
+                                <div class="form-text">The foundation model to use for your agent.</div>
+                            </div>
+                            
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="contextSize" class="form-label">Context Size</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="contextSize" min="1000" max="100000" value="16000">
+                                        <span class="input-group-text">tokens</span>
+                                    </div>
+                                    <div class="form-text">Maximum context length the model can process.</div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="temperature" class="form-label">Temperature</label>
+                                    <input type="range" class="form-range" id="temperature" min="0" max="1" step="0.1" value="0.7">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="form-text">Precise (0.0)</span>
+                                        <span class="form-text">Creative (1.0)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Advanced Features</label>
+                                
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="featureAgentThought" checked>
+                                    <label class="form-check-label" for="featureAgentThought">
+                                        Agent Thought
+                                        <div class="text-muted small">Enable reasoning capabilities</div>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="featureVision">
+                                    <label class="form-check-label" for="featureVision">
+                                        Vision
+                                        <div class="text-muted small">Enable image understanding</div>
+                                    </label>
+                                </div>
+                                
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="featureToolUsage">
+                                    <label class="form-check-label" for="featureToolUsage">
+                                        Tool Usage
+                                        <div class="text-muted small">Enable external tool integration</div>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                        
+                        <div class="d-flex justify-content-between mt-4">
+                            <button class="btn btn-outline-secondary" id="backToStep3Btn">Back</button>
+                            <button class="btn btn-primary" id="goToStep5Btn">Continue</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 5: Goals & Evaluation (OODA Loop) -->
+                <div class="tab-pane fade wizard-pane" id="step5">
+                    <div class="wizard-content">
+                        <h3 class="mb-4">Goals & Evaluation Framework</h3>
+                        <p class="text-muted mb-4">Configure your agent's OODA (Observe, Orient, Decide, Act) loop to create an adaptive, goal-oriented agent that continuously improves.</p>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <div class="ooda-diagram mb-4">
+                                    <div class="card border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-3 text-center mb-3 mb-md-0">
+                                                    <div class="ooda-step">
+                                                        <div class="ooda-icon bg-royal-blue text-white">
+                                                            <i class="bi bi-eye-fill"></i>
+                                                        </div>
+                                                        <h5 class="mt-3">OBSERVE</h5>
+                                                        <p class="small">Collect relevant data from user interactions and task outcomes</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 text-center mb-3 mb-md-0">
+                                                    <div class="ooda-step">
+                                                        <div class="ooda-icon bg-tatooine-dawn text-white">
+                                                            <i class="bi bi-compass"></i>
+                                                        </div>
+                                                        <h5 class="mt-3">ORIENT</h5>
+                                                        <p class="small">Analyze data against goals and adjust internal models</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 text-center mb-3 mb-md-0">
+                                                    <div class="ooda-step">
+                                                        <div class="ooda-icon bg-solar-eclipse text-white">
+                                                            <i class="bi bi-lightbulb-fill"></i>
+                                                        </div>
+                                                        <h5 class="mt-3">DECIDE</h5>
+                                                        <p class="small">Select optimal strategies to achieve defined goals</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3 text-center">
+                                                    <div class="ooda-step">
+                                                        <div class="ooda-icon bg-midnight-blue text-white">
+                                                            <i class="bi bi-gear-fill"></i>
+                                                        </div>
+                                                        <h5 class="mt-3">ACT</h5>
+                                                        <p class="small">Execute selected strategies and measure effectiveness</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Business Goals Definition</h5>
+                                <p class="text-muted small mb-3">Define what success looks like in business terms. These will be translated into technical parameters.</p>
+                                
+                                <div class="mb-3">
+                                    <label for="primaryGoal" class="form-label">Primary Goal</label>
+                                    <input type="text" class="form-control" id="primaryGoal" placeholder="e.g., Reduce medical coding errors by 30%">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="secondaryGoals" class="form-label">Secondary Goals</label>
+                                    <textarea class="form-control" id="secondaryGoals" rows="2" placeholder="e.g., Accelerate throughput, Improve compliance rates"></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="constraintsDef" class="form-label">Constraints</label>
+                                    <textarea class="form-control" id="constraintsDef" rows="2" placeholder="e.g., Must complete analysis within 2 seconds, HIPAA compliance"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h5 class="mb-3">Success Metrics</h5>
+                                <p class="text-muted small mb-3">Measurable indicators that determine if the agent is meeting its goals.</p>
+                                
+                                <div class="mb-3" id="metricsDynamicSection">
+                                    <div class="metric-item mb-2">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Metric name (e.g., Accuracy Rate)" aria-label="Metric name">
+                                            <select class="form-select" style="max-width: 150px;">
+                                                <option selected>Type</option>
+                                                <option value="percentage">Percentage</option>
+                                                <option value="count">Count</option>
+                                                <option value="time">Time (ms)</option>
+                                                <option value="boolean">Boolean</option>
+                                                <option value="score">Score (0-1)</option>
+                                            </select>
+                                            <button class="btn btn-outline-secondary" type="button">
+                                                <i class="bi bi-dash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="metric-item mb-2">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Metric name" aria-label="Metric name">
+                                            <select class="form-select" style="max-width: 150px;">
+                                                <option selected>Type</option>
+                                                <option value="percentage">Percentage</option>
+                                                <option value="count">Count</option>
+                                                <option value="time">Time (ms)</option>
+                                                <option value="boolean">Boolean</option>
+                                                <option value="score">Score (0-1)</option>
+                                            </select>
+                                            <button class="btn btn-outline-secondary" type="button">
+                                                <i class="bi bi-dash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="btn btn-outline-primary btn-sm" id="addMetricBtn">
+                                    <i class="bi bi-plus"></i> Add Metric
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-4">
+                            <div class="col-md-12">
+                                <h5 class="mb-3">Adaptation Parameters</h5>
+                                <p class="text-muted small mb-3">Configure how the agent will adapt its behavior based on feedback.</p>
+                                
+                                <div class="card border-0 bg-light">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Adaptation Level</label>
+                                                    <select class="form-select" id="adaptationLevel">
+                                                        <option value="parameter">Parameter Adjustment</option>
+                                                        <option value="strategy" selected>Strategy Selection</option>
+                                                        <option value="learning">Complex Learning</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="adaptationRate" class="form-label">Adaptation Rate</label>
+                                                    <input type="range" class="form-range" id="adaptationRate" min="0.1" max="1" step="0.1" value="0.5">
+                                                    <div class="d-flex justify-content-between">
+                                                        <span class="form-text">Conservative</span>
+                                                        <span class="form-text">Aggressive</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="mb-3">
+                                                    <label for="feedbackInterval" class="form-label">Feedback Interval</label>
+                                                    <select class="form-select" id="feedbackInterval">
+                                                        <option value="continuous">Continuous</option>
+                                                        <option value="interaction">Every Interaction</option>
+                                                        <option value="daily" selected>Daily</option>
+                                                        <option value="weekly">Weekly</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="accordion" id="adaptationAccordion">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                                Advanced OODA Configuration
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#adaptationAccordion">
+                                            <div class="accordion-body">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <h6>Observation Parameters</h6>
+                                                        <div class="form-check mb-2">
+                                                            <input class="form-check-input" type="checkbox" id="trackUserFeedback" checked>
+                                                            <label class="form-check-label" for="trackUserFeedback">
+                                                                Track User Feedback
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mb-2">
+                                                            <input class="form-check-input" type="checkbox" id="trackSystemMetrics" checked>
+                                                            <label class="form-check-label" for="trackSystemMetrics">
+                                                                Track System Metrics
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mb-2">
+                                                            <input class="form-check-input" type="checkbox" id="trackExternalEvents">
+                                                            <label class="form-check-label" for="trackExternalEvents">
+                                                                Track External Events
+                                                            </label>
+                                                        </div>
+                                                        
+                                                        <h6 class="mt-3">Orientation Parameters</h6>
+                                                        <div class="form-check mb-2">
+                                                            <input class="form-check-input" type="checkbox" id="useHistoricalData" checked>
+                                                            <label class="form-check-label" for="useHistoricalData">
+                                                                Use Historical Data
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mb-2">
+                                                            <input class="form-check-input" type="checkbox" id="useBayesianUpdates" checked>
+                                                            <label class="form-check-label" for="useBayesianUpdates">
+                                                                Use Bayesian Updates
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <h6>Decision Parameters</h6>
+                                                        <div class="form-check mb-2">
+                                                            <input class="form-check-input" type="checkbox" id="useMultiArmBandit" checked>
+                                                            <label class="form-check-label" for="useMultiArmBandit">
+                                                                Use Multi-Arm Bandit
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mb-2">
+                                                            <input class="form-check-input" type="checkbox" id="useThompsonSampling">
+                                                            <label class="form-check-label" for="useThompsonSampling">
+                                                                Use Thompson Sampling
+                                                            </label>
+                                                        </div>
+                                                        
+                                                        <h6 class="mt-3">Action Parameters</h6>
+                                                        <div class="form-check mb-2">
+                                                            <input class="form-check-input" type="checkbox" id="recordAllActions" checked>
+                                                            <label class="form-check-label" for="recordAllActions">
+                                                                Record All Actions
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check mb-2">
+                                                            <input class="form-check-input" type="checkbox" id="implementGradualChanges" checked>
+                                                            <label class="form-check-label" for="implementGradualChanges">
+                                                                Implement Gradual Changes
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info mt-4" role="alert">
+                            <i class="bi bi-info-circle me-2"></i>
+                            <strong>Unique to Ailevate:</strong> The OODA loop implementation creates continuous adaptation through a 
+                            feedback-driven mechanism that allows your agent to evolve and improve without requiring manual retraining.
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mt-4">
+                            <button class="btn btn-outline-secondary" id="backToStep4Btn">Back</button>
+                            <button class="btn btn-primary" id="goToStep6Btn">Continue</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 6: Preview & Export -->
+                <div class="tab-pane fade wizard-pane" id="step6">
+                    <div class="wizard-content">
+                        <h3 class="mb-4">Preview & Export</h3>
+                        <p class="text-muted mb-4">Simulate your agent's behavior and export the configuration.</p>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Agent Preview</h5>
+                                <div class="btn-group mb-3" role="group">
+                                    <button id="simulateAgentInteraction" class="btn btn-outline-primary">
+                                        <i class="bi bi-play-fill me-1"></i> Basic Simulation
+                                    </button>
+                                    <button id="simulateOODALoop" class="btn btn-outline-secondary">
+                                        <i class="bi bi-arrow-repeat me-1"></i> OODA Loop Simulation
+                                    </button>
+                                </div>
+                                
+                                <div id="previewSection" class="d-none">
+                                    <div class="agent-preview">
+                                        <div id="agentPreview" class="bg-light p-3 rounded mb-3" style="height: 300px; overflow-y: auto;">
+                                            <!-- Simulation chat messages will appear here -->
+                                        </div>
+                                        
+                                        <div id="oodaMetrics" class="d-none">
+                                            <h6 class="mt-2">OODA Loop Metrics</h6>
+                                            <div class="row g-2 mb-2">
+                                                <div class="col">
+                                                    <div class="card border-0 bg-light">
+                                                        <div class="card-body p-2">
+                                                            <div class="d-flex justify-content-between align-items-center">
+                                                                <span class="small text-muted">Adaptation Cycle</span>
+                                                                <span id="adaptationCycle" class="badge bg-primary">1</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="card border-0 bg-light">
+                                                        <div class="card-body p-2">
+                                                            <div class="d-flex justify-content-between align-items-center">
+                                                                <span class="small text-muted">Performance</span>
+                                                                <span id="performanceMetric" class="badge bg-success">82%</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="card border-0 bg-light">
+                                                        <div class="card-body p-2">
+                                                            <div class="d-flex justify-content-between align-items-center">
+                                                                <span class="small text-muted">Strategy</span>
+                                                                <span id="currentStrategy" class="badge bg-info">S1</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="ooda-progress mb-3">
+                                                <div class="d-flex justify-content-between small text-muted mb-1">
+                                                    <span>Progress toward goal</span>
+                                                    <span id="goalProgress">43%</span>
+                                                </div>
+                                                <div class="progress" style="height: 6px;">
+                                                    <div id="goalProgressBar" class="progress-bar bg-royal-blue" role="progressbar" style="width: 43%" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h5>YAML Configuration</h5>
+                                <button id="generateYaml" class="btn btn-outline-primary mb-3">
+                                    <i class="bi bi-code-slash me-1"></i> Generate YAML
+                                </button>
+                                
+                                <div id="yamlOutputSection" class="d-none">
+                                    <div class="yaml-output">
+                                        <pre id="yamlOutput"><!-- Generated YAML will appear here --></pre>
+                                    </div>
+                                    
+                                    <div class="mt-3">
+                                        <button id="copyYaml" class="btn btn-sm btn-outline-secondary me-2">
+                                            <i class="bi bi-clipboard me-1"></i> Copy
+                                        </button>
+                                        <button id="downloadYaml" class="btn btn-sm btn-outline-secondary">
+                                            <i class="bi bi-download me-1"></i> Download
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-success mt-4" role="alert">
+                            <i class="bi bi-lightbulb me-2"></i>
+                            <strong>Next Steps:</strong> Once exported, you can import this YAML configuration into Dify.ai to deploy your agent.
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mt-4">
+                            <button class="btn btn-outline-secondary" id="backToStep5Btn">Back</button>
+                            <a href="gallery.html" class="btn btn-primary">Finish</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2025 Ailevate, Inc. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-decoration-none text-secondary me-3">Privacy Policy</a>
+                    <a href="#" class="text-decoration-none text-secondary me-3">Terms of Service</a>
+                    <a href="#" class="text-decoration-none text-secondary">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Simple, focused solution for template selection
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM loaded - setting up template selection");
+            
+            // Template selection
+            const allCards = document.querySelectorAll('.agent-card');
+            const continueBtn = document.getElementById('step1ContinueBtn');
+            const selectedTemplateInput = document.getElementById('selectedTemplate');
+            
+            // Add click handlers to all template cards
+            allCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Get template ID from the data attribute
+                    const templateId = this.getAttribute('data-template-id');
+                    console.log(`Card clicked: ${templateId}`);
+                    
+                    // Remove selected state from all cards
+                    allCards.forEach(c => {
+                        c.classList.remove('selected-card');
+                        c.style.borderColor = '';
+                        c.style.backgroundColor = '';
+                    });
+                    
+                    // Mark this card as selected
+                    this.classList.add('selected-card');
+                    
+                    // Store the selected template ID
+                    selectedTemplateInput.value = templateId;
+                    
+                    // Enable continue button
+                    continueBtn.disabled = false;
+                    continueBtn.classList.remove('btn-secondary');
+                    continueBtn.classList.add('btn-primary');
+                    
+                    console.log(`Selected template: ${templateId}`);
+                    
+                    // Store for later use when we populate form fields
+                    window.selectedTemplateType = templateId;
+                });
+                
+                // Hover effect (optional - CSS already handles this)
+                card.addEventListener('mouseover', function() {
+                    if (!this.classList.contains('selected-card')) {
+                        this.style.transform = 'translateY(-5px)';
+                        this.style.boxShadow = '0 10px 20px rgba(0,0,0,0.1)';
+                    }
+                });
+                
+                card.addEventListener('mouseout', function() {
+                    if (!this.classList.contains('selected-card')) {
+                        this.style.transform = '';
+                        this.style.boxShadow = '';
+                    }
+                });
+            });
+            
+            // Step navigation setup
+            continueBtn.addEventListener('click', function() {
+                goToStep(2);
+                
+                // Populate form fields based on selected template
+                populateFormFields();
+            });
+            
+            // Step navigation buttons
+            document.getElementById('backToStep1Btn').addEventListener('click', function() {
+                goToStep(1);
+            });
+            
+            document.getElementById('goToStep3Btn').addEventListener('click', function() {
+                goToStep(3);
+                // Update capabilities section based on the selected template
+                updateCapabilitiesSection();
+            });
+            
+            document.getElementById('backToStep2Btn').addEventListener('click', function() {
+                goToStep(2);
+            });
+            
+            document.getElementById('goToStep4Btn').addEventListener('click', function() {
+                goToStep(4);
+            });
+            
+            document.getElementById('backToStep3Btn').addEventListener('click', function() {
+                goToStep(3);
+            });
+            
+            document.getElementById('goToStep5Btn').addEventListener('click', function() {
+                goToStep(5);
+            });
+            
+            document.getElementById('backToStep4Btn').addEventListener('click', function() {
+                goToStep(4);
+            });
+            
+            document.getElementById('goToStep6Btn').addEventListener('click', function() {
+                goToStep(6);
+            });
+            
+            document.getElementById('backToStep5Btn').addEventListener('click', function() {
+                goToStep(5);
+            });
+            
+            // Add wizard tab click handlers
+            document.querySelectorAll('#wizardNav .nav-link').forEach((link, index) => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    goToStep(index + 1);
+                });
+            });
+        });
+        
+        // Step navigation function
+        function goToStep(stepNumber) {
+            console.log(`Navigating to step ${stepNumber}`);
+            
+            // Hide all steps
+            document.querySelectorAll('.wizard-pane').forEach(step => {
+                step.classList.remove('active', 'show');
+            });
+            
+            // Show the target step
+            const targetStep = document.getElementById(`step${stepNumber}`);
+            if (targetStep) {
+                targetStep.classList.add('active', 'show');
+            }
+            
+            // Update tabs
+            document.querySelectorAll('#wizardNav .nav-link').forEach((link, index) => {
+                if (index + 1 === stepNumber) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+            
+            // Update progress bar
+            const progressBar = document.querySelector('.progress-bar');
+            if (progressBar) {
+                const progressPercentage = (stepNumber / 6) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                progressBar.setAttribute('aria-valuenow', progressPercentage);
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // If we're going to step 6, set up simulation buttons
+            if (stepNumber === 6) {
+                setupSimulationButtons();
+            }
+        }
+        
+        // Timeout management
+        let simulationTimeouts = [];
+        
+        function clearAllTimeouts() {
+            if (simulationTimeouts.length > 0) {
+                console.log(`Clearing ${simulationTimeouts.length} active timeouts`);
+                simulationTimeouts.forEach(id => clearTimeout(id));
+                simulationTimeouts = [];
+            }
+        }
+        
+        // Function to set up simulation buttons
+        function setupSimulationButtons() {
+            console.log("Setting up simulation buttons");
+            
+            // Get the buttons
+            const basicSimBtn = document.getElementById('simulateAgentInteraction');
+            const oodaSimBtn = document.getElementById('simulateOODALoop');
+            
+            // Set up Basic Simulation button
+            if (basicSimBtn) {
+                basicSimBtn.addEventListener('click', function() {
+                    // Reset both buttons to outline style
+                    basicSimBtn.classList.remove('btn-primary');
+                    basicSimBtn.classList.add('btn-outline-primary');
+                    oodaSimBtn.classList.remove('btn-primary');
+                    oodaSimBtn.classList.add('btn-outline-secondary');
+                    
+                    // Highlight the clicked button
+                    basicSimBtn.classList.remove('btn-outline-primary');
+                    basicSimBtn.classList.add('btn-primary');
+                    
+                    // Run the simulation
+                    simulateAgentInteraction();
+                });
+            }
+            
+            // Set up OODA Loop Simulation button
+            if (oodaSimBtn) {
+                oodaSimBtn.addEventListener('click', function() {
+                    // Reset both buttons to outline style
+                    basicSimBtn.classList.remove('btn-primary');
+                    basicSimBtn.classList.add('btn-outline-primary');
+                    oodaSimBtn.classList.remove('btn-primary');
+                    oodaSimBtn.classList.add('btn-outline-secondary');
+                    
+                    // Highlight the clicked button
+                    oodaSimBtn.classList.remove('btn-outline-secondary');
+                    oodaSimBtn.classList.add('btn-primary');
+                    
+                    // Run the simulation
+                    simulateOODALoop();
+                });
+            }
+        }
+        
+        // Basic Simulation
+        function simulateAgentInteraction() {
+            console.log("Basic simulation started");
+            
+            // Clear any existing timeouts
+            clearAllTimeouts();
+            
+            const agentPreview = document.getElementById('agentPreview');
+            const previewSection = document.getElementById('previewSection');
+            const oodaMetrics = document.getElementById('oodaMetrics');
+            
+            if (!agentPreview || !previewSection) {
+                console.error("Preview elements not found");
+                return;
+            }
+            
+            // Reset simulation UI state
+            if (agentPreview) {
+                agentPreview.innerHTML = '';
+            }
+            
+            // Get agent name
+            const agentName = document.getElementById('agentName')?.value || 'AI Agent';
+            
+            // Get selected capabilities
+            const capabilities = [];
+            document.querySelectorAll('input[name="capabilities"]:checked').forEach(input => {
+                capabilities.push(input.value);
+            });
+            
+            // Show preview section and hide OODA metrics
+            previewSection.classList.remove('d-none');
+            if (oodaMetrics) {
+                oodaMetrics.classList.add('d-none');
+            }
+            
+            // Clear previous messages
+            agentPreview.innerHTML = '';
+            
+            // Add user message
+            addMessageToPreview('user', 'Can you help me with a task?');
+            
+            // Simulate typing with delay
+            simulationTimeouts.push(setTimeout(() => {
+                // Generate response based on selected capabilities
+                let response = `Hello! I'm ${agentName}, your AI assistant. `;
+                
+                if (capabilities.includes('medical-coding')) {
+                    response += "I can help you review medical procedure and diagnostic codes for errors, compliance issues, and optimization opportunities.";
+                    
+                    // Continue conversation for medical coding
+                    simulationTimeouts.push(setTimeout(() => {
+                        addMessageToPreview('user', 'I need to check if code J20.9 is correctly paired with procedure 31575.');
+                        
+                        simulationTimeouts.push(setTimeout(() => {
+                            addMessageToPreview('agent', "I've analyzed these codes and can confirm that J20.9 (Acute bronchitis, unspecified) and 31575 (Laryngoscopy, flexible; diagnostic) can be paired if the laryngoscopy was performed to evaluate symptoms related to the bronchitis. However, you might want to consider a more specific respiratory code if the procedure was focused on examining the bronchial area directly. Would you like me to suggest some alternative coding options?");
+                        }, 1200));
+                    }, 1500));
+                } 
+                else if (capabilities.includes('data-analysis')) {
+                    response += "I can help you analyze data sets, identify patterns, and generate visualizations and insights.";
+                    
+                    // Continue conversation for data analysis
+                    simulationTimeouts.push(setTimeout(() => {
+                        addMessageToPreview('user', 'Can you analyze my patient admission data to find patterns?');
+                        
+                        simulationTimeouts.push(setTimeout(() => {
+                            addMessageToPreview('agent', "I'd be happy to analyze your patient admission data. Based on the information provided, I can identify seasonal trends, demographic patterns, and admission type correlations. The analysis shows that admissions peak during winter months (32% above average), with respiratory conditions being the primary driver. Would you like me to break down the analysis by department or patient demographics?");
+                        }, 1200));
+                    }, 1500));
+                }
+                else if (capabilities.includes('qa')) {
+                    response += "I can answer questions about your products and services based on my knowledge base.";
+                    
+                    // Continue conversation for QA
+                    simulationTimeouts.push(setTimeout(() => {
+                        addMessageToPreview('user', 'What are your current subscription plans?');
+                        
+                        simulationTimeouts.push(setTimeout(() => {
+                            addMessageToPreview('agent', "We currently offer three subscription tiers: Basic ($9.99/month) with essential features, Pro ($19.99/month) with advanced analytics and priority support, and Enterprise (custom pricing) for organizations needing dedicated resources and custom integrations. All plans include a 14-day free trial. Would you like more specific details about any of these plans?");
+                        }, 1200));
+                    }, 1500));
+                }
+                else {
+                    response += "I'm here to assist you with any questions or tasks within my capabilities.";
+                    
+                    // Generic continuation
+                    simulationTimeouts.push(setTimeout(() => {
+                        addMessageToPreview('user', 'What can you help me with?');
+                        
+                        simulationTimeouts.push(setTimeout(() => {
+                            addMessageToPreview('agent', "I can assist with a variety of tasks based on my configuration. My capabilities include providing information, answering questions, and helping with domain-specific tasks. To best assist you, could you tell me more about what you're working on or what type of information you're looking for?");
+                        }, 1200));
+                    }, 1500));
+                }
+                
+                addMessageToPreview('agent', response);
+            }, 1000));
+        }
+        
+        // OODA Loop Simulation
+        function simulateOODALoop() {
+            console.log("OODA Loop simulation started");
+            
+            // Clear any existing timeouts
+            clearAllTimeouts();
+            
+            const agentPreview = document.getElementById('agentPreview');
+            const previewSection = document.getElementById('previewSection');
+            const oodaMetrics = document.getElementById('oodaMetrics');
+            
+            if (!agentPreview || !previewSection || !oodaMetrics) {
+                console.error("Preview elements not found");
+                return;
+            }
+            
+            // Reset simulation UI state
+            if (agentPreview) {
+                agentPreview.innerHTML = '';
+            }
+            
+            // Get agent name
+            const agentName = document.getElementById('agentName')?.value || 'AI Agent';
+            const primaryGoal = document.getElementById('primaryGoal')?.value || 'Improve performance metrics';
+            
+            // Get selected capabilities
+            const capabilities = [];
+            document.querySelectorAll('input[name="capabilities"]:checked').forEach(input => {
+                capabilities.push(input.value);
+            });
+            
+            // Show preview section and OODA metrics
+            previewSection.classList.remove('d-none');
+            oodaMetrics.classList.remove('d-none');
+            
+            // Clear previous messages
+            agentPreview.innerHTML = '';
+            
+            // Initialize metrics
+            updateOODAMetrics('65%', '0%', 'S1', '1');
+            
+            // Determine domain-specific conversation based on capabilities
+            let userQuestion1, userQuestion2, agentResponse1, agentResponse2, agentResponse3;
+            let domainSpecificAnalysis = '';
+            
+            if (capabilities.includes('medical-coding')) {
+                userQuestion1 = 'I need to review the proper codes for a patient with COPD and pneumonia.';
+                userQuestion2 = 'What\'s the most appropriate coding approach for this case?';
+                agentResponse1 = "I can help with that. Could you provide any additional clinical details about the case?";
+                agentResponse2 = "For a patient with COPD and pneumonia, you should use J44.0 (COPD with acute lower respiratory infection) as the primary code, with J18.9 (Pneumonia, unspecified) as a secondary code.";
+                agentResponse3 = "Based on the comprehensive analysis of the patient's clinical presentation, the most appropriate coding approach is to use J44.0 (COPD with acute lower respiratory infection) as the primary code, with J18.9 (Pneumonia, unspecified) as a secondary code. Additionally, if acute exacerbation is documented, add J44.1. Consider also adding a code for respiratory failure (J96.0) if present, as this occurs in approximately 28% of similar cases and significantly impacts reimbursement rates.";
+                domainSpecificAnalysis = "Code accuracy improved to 85%, reimbursement optimization rate 92%";
+            } else if (capabilities.includes('data-analysis')) {
+                userQuestion1 = 'Can you analyze our patient readmission data to find patterns?';
+                userQuestion2 = 'What are the key drivers of our increasing readmission rates?';
+                agentResponse1 = "I can help analyze your readmission data. What specific metrics are you most interested in understanding?";
+                agentResponse2 = "Based on initial analysis, readmission rates appear to correlate with discharge timing and follow-up care. I'd need more detailed data to provide specific drivers.";
+                agentResponse3 = "After comprehensive multivariate analysis, the key drivers of increasing readmission rates are: 1) Post-discharge follow-up timing (patients seen >14 days after discharge have 2.8x higher readmission rates), 2) Medication reconciliation issues (64% of readmissions had medication discrepancies), 3) Transportation barriers (accounting for 31% of missed follow-ups), and 4) Discharge during peak hospital occupancy (>85% capacity correlates with 23% higher readmission rates). Focusing on the first two factors could reduce readmissions by approximately 42% based on historical patterns.";
+                domainSpecificAnalysis = "Analysis completeness 85%, insight actionability 93%";
+            } else {
+                userQuestion1 = 'I need help with a complex task in my domain.';
+                userQuestion2 = 'What\'s the most efficient approach for my situation?';
+                agentResponse1 = "I'm here to assist. What specific information can I help you with?";
+                agentResponse2 = "Based on what you've shared, I recommend focusing on three key areas. Could you provide more context about your priorities?";
+                agentResponse3 = "Based on your specific context and goals, the most efficient approach would be to implement a three-phase strategy: First, conduct a structured assessment using the framework we discussed earlier, which addresses your immediate priorities of resolution speed and accuracy. Second, leverage automated analysis tools that account for your resource constraints while maintaining quality. Third, establish continuous monitoring aligned with your long-term objectives of sustainability and scalability. This approach typically results in 34% faster implementation and 28% better outcomes compared to standard methods.";
+                domainSpecificAnalysis = "Response quality 85%, personalization accuracy 89%";
+            }
+            
+            // Initial system message
+            addSystemMessage(`OODA Loop Simulation Started: Goal is to "${primaryGoal}"`);
+            
+            // CYCLE 1
+            simulationTimeouts.push(setTimeout(() => {
+                addSystemMessage("OBSERVE: Collecting initial performance data and user feedback...");
+                
+                simulationTimeouts.push(setTimeout(() => {
+                    addMessageToPreview('user', userQuestion1);
+                    
+                    simulationTimeouts.push(setTimeout(() => {
+                        addMessageToPreview('agent', agentResponse1);
+                        
+                        simulationTimeouts.push(setTimeout(() => {
+                            addSystemMessage("ORIENT: Analyzing performance data against goal...");
+                            addSystemMessage("Performance analysis: Response quality 65%, specificity 53%");
+                            updateOODAMetrics('65%', '0%', 'S1', '1');
+                            
+                            simulationTimeouts.push(setTimeout(() => {
+                                addSystemMessage("DECIDE: Current strategy needs improvement. Switching to inquiry-based approach.");
+                                
+                                simulationTimeouts.push(setTimeout(() => {
+                                    addSystemMessage("ACT: Implementing targeted inquiry for context-building");
+                                    addSystemMessage("CYCLE 2: Testing new strategy...");
+                                    updateOODAMetrics('65%', '15%', 'S2', '1');
+                                    
+                                    // CYCLE 2
+                                    simulationTimeouts.push(setTimeout(() => {
+                                        updateOODAMetrics('72%', '25%', 'S2', '2');
+                                        
+                                        simulationTimeouts.push(setTimeout(() => {
+                                            addMessageToPreview('user', userQuestion2);
+                                            
+                                            simulationTimeouts.push(setTimeout(() => {
+                                                addMessageToPreview('agent', agentResponse2);
+                                                
+                                                simulationTimeouts.push(setTimeout(() => {
+                                                    addSystemMessage("ORIENT: Analyzing updated performance...");
+                                                    addSystemMessage("Performance analysis: Response quality improved to 72%, specificity 71%");
+                                                    
+                                                    simulationTimeouts.push(setTimeout(() => {
+                                                        addSystemMessage("DECIDE: Strategy S2 shows improvement. Enhancing with personalized recommendations (S3).");
+                                                        
+                                                        simulationTimeouts.push(setTimeout(() => {
+                                                            addSystemMessage("ACT: Implementing context-aware personalized recommendations");
+                                                            updateOODAMetrics('72%', '35%', 'S3', '2');
+                                                            
+                                                            // CYCLE 3
+                                                            simulationTimeouts.push(setTimeout(() => {
+                                                                updateOODAMetrics('85%', '60%', 'S3', '3');
+                                                                addSystemMessage("CYCLE 3: Testing enhanced strategy...");
+                                                                
+                                                                simulationTimeouts.push(setTimeout(() => {
+                                                                    addMessageToPreview('user', "Based on everything we've discussed, what's your final recommendation?");
+                                                                    
+                                                                    simulationTimeouts.push(setTimeout(() => {
+                                                                        addMessageToPreview('agent', agentResponse3);
+                                                                        
+                                                                        simulationTimeouts.push(setTimeout(() => {
+                                                                            addSystemMessage("ORIENT: Final performance analysis...");
+                                                                            addSystemMessage(`Performance analysis: ${domainSpecificAnalysis}`);
+                                                                            
+                                                                            simulationTimeouts.push(setTimeout(() => {
+                                                                                addSystemMessage("DECIDE: Strategy S3 performs well. Making minor adjustments to explanation depth.");
+                                                                                
+                                                                                simulationTimeouts.push(setTimeout(() => {
+                                                                                    addSystemMessage("ACT: Optimization complete. Goal progress at 85%.");
+                                                                                    addSystemMessage("OODA Loop Simulation Complete: Agent successfully adapted to meet goal.");
+                                                                                    updateOODAMetrics('85%', '85%', 'S3+', '3');
+                                                                                }, 1000));
+                                                                            }, 1000));
+                                                                        }, 1000));
+                                                                    }, 1200));
+                                                                }, 1000));
+                                                            }, 1000));
+                                                        }, 1000));
+                                                    }, 1000));
+                                                }, 1000));
+                                            }, 1200));
+                                        }, 1000));
+                                    }, 1000));
+                                }, 1000));
+                            }, 1000));
+                        }, 1000));
+                    }, 1000));
+                }, 1000));
+            }, 500));
+        }
+        
+        // Helper function to add message to preview
+        function addMessageToPreview(type, content) {
+            const agentPreview = document.getElementById('agentPreview');
+            if (!agentPreview) return;
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `preview-message ${type === 'user' ? 'user-message' : 'agent-message'}`;
+            
+            const icon = document.createElement('i');
+            icon.className = type === 'user' ? 'bi bi-person-circle me-2' : 'bi bi-robot me-2';
+            
+            const span = document.createElement('span');
+            span.textContent = type === 'user' ? 'You: ' : 'Agent: ';
+            span.style.fontWeight = 'bold';
+            
+            const contentSpan = document.createElement('span');
+            contentSpan.textContent = content;
+            
+            messageDiv.appendChild(icon);
+            messageDiv.appendChild(span);
+            messageDiv.appendChild(contentSpan);
+            
+            agentPreview.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            agentPreview.scrollTop = agentPreview.scrollHeight;
+        }
+        
+        // Helper function to add system message
+        function addSystemMessage(message) {
+            const agentPreview = document.getElementById('agentPreview');
+            if (!agentPreview) return;
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'system-message';
+            
+            const icon = document.createElement('i');
+            icon.className = 'bi bi-gear-fill me-2';
+            
+            const contentSpan = document.createElement('span');
+            contentSpan.textContent = message;
+            
+            messageDiv.appendChild(icon);
+            messageDiv.appendChild(contentSpan);
+            
+            agentPreview.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            agentPreview.scrollTop = agentPreview.scrollHeight;
+        }
+        
+        // Helper function to update OODA metrics
+        function updateOODAMetrics(performance, progress, strategy, cycle) {
+            const performanceMetric = document.getElementById('performanceMetric');
+            const goalProgress = document.getElementById('goalProgress');
+            const goalProgressBar = document.getElementById('goalProgressBar');
+            const currentStrategy = document.getElementById('currentStrategy');
+            const adaptationCycle = document.getElementById('adaptationCycle');
+            
+            if (performanceMetric) performanceMetric.textContent = performance;
+            if (goalProgress) goalProgress.textContent = progress;
+            if (goalProgressBar) {
+                goalProgressBar.style.width = progress;
+                goalProgressBar.setAttribute('aria-valuenow', parseInt(progress));
+            }
+            if (currentStrategy) currentStrategy.textContent = strategy;
+            if (adaptationCycle) adaptationCycle.textContent = cycle;
+        }
+        
+        // Function to update capabilities section based on template
+        function updateCapabilitiesSection() {
+            const templateId = window.selectedTemplateType;
+            
+            if (!templateId) {
+                console.log("No template selected for capabilities update");
+                return;
+            }
+            
+            console.log(`Updating capabilities section for template: ${templateId}`);
+            
+            // Get the capabilities section
+            const capabilitiesSection = document.querySelector('#step3 .wizard-content');
+            
+            if (!capabilitiesSection) {
+                console.error("Capabilities section not found");
+                return;
+            }
+            
+            // Update the heading to reflect the template
+            const capabilitiesHeading = capabilitiesSection.querySelector('h3');
+            
+            if (capabilitiesHeading) {
+                switch(templateId) {
+                    case 'medical-coding':
+                        capabilitiesHeading.textContent = "Medical Coding Capabilities";
+                        break;
+                    case 'data-analysis':
+                        capabilitiesHeading.textContent = "Data Analysis Capabilities";
+                        break;
+                    case 'customer-support':
+                        capabilitiesHeading.textContent = "Customer Support Capabilities";
+                        break;
+                    default:
+                        capabilitiesHeading.textContent = "Agent Capabilities";
+                        break;
+                }
+            }
+            
+            // Highlight template-specific capabilities
+            highlightTemplateCapabilities(templateId);
+            
+            // Update the guidance message
+            const guidanceMessage = document.getElementById('capabilitiesGuidance');
+            if (guidanceMessage) {
+                switch(templateId) {
+                    case 'medical-coding':
+                        guidanceMessage.textContent = "For medical coding agents, we recommend enabling Medical Coding Analysis, Document Summarization, and relevant knowledge bases for optimal performance.";
+                        break;
+                    case 'data-analysis':
+                        guidanceMessage.textContent = "For data analysis agents, we recommend enabling Data Analysis, Statistical Methods, and Document Summarization capabilities for comprehensive analysis.";
+                        break;
+                    case 'customer-support':
+                        guidanceMessage.textContent = "For customer support agents, we recommend enabling Question Answering, Document Summarization, and Product Information capabilities.";
+                        break;
+                    default:
+                        guidanceMessage.textContent = "The agent's capabilities determine how it will respond to user queries and what tasks it can perform.";
+                        break;
+                }
+            }
+        }
+        
+        // Function to customize capabilities section for the selected template
+        function highlightTemplateCapabilities(templateId) {
+            // Get the capabilities containers
+            const coreCapabilitiesContainer = document.querySelector('#step3 .wizard-content .row .col-md-6:first-child');
+            const knowledgeContainer = document.querySelector('#step3 .wizard-content .row .col-md-6:last-child');
+            
+            if (!coreCapabilitiesContainer || !knowledgeContainer) {
+                console.error("Capabilities containers not found");
+                return;
+            }
+            
+            // Clear existing capabilities
+            coreCapabilitiesContainer.innerHTML = '';
+            knowledgeContainer.innerHTML = '';
+            
+            // Add core capabilities section heading
+            coreCapabilitiesContainer.innerHTML = `<h5 class="mb-3">Core Capabilities</h5>`;
+            
+            // Add knowledge section heading
+            knowledgeContainer.innerHTML = `<h5 class="mb-3">Knowledge Base</h5>`;
+            
+            // Define capabilities based on template
+            let coreCapabilities = [];
+            let knowledgeBases = [];
+            
+            switch(templateId) {
+                case 'medical-coding':
+                    coreCapabilities = [
+                        { id: 'capabilityQA', value: 'qa', label: 'Question Answering', desc: 'Respond to medical coding queries', checked: true },
+                        { id: 'capabilityMedicalCoding', value: 'medical-coding', label: 'Medical Coding Analysis', desc: 'Review and validate medical codes', checked: true },
+                        { id: 'capabilityDocSummarization', value: 'document-summarization', label: 'Document Summarization', desc: 'Summarize medical documentation', checked: true },
+                        { id: 'capabilityComplianceCheck', value: 'compliance-check', label: 'Compliance Checking', desc: 'Verify adherence to coding standards', checked: false }
+                    ];
+                    
+                    knowledgeBases = [
+                        { id: 'knowledgeICD10', value: 'icd10', label: 'ICD-10 Codes', desc: 'International Classification of Diseases', checked: true },
+                        { id: 'knowledgeCPT', value: 'cpt', label: 'CPT Codes', desc: 'Current Procedural Terminology', checked: true },
+                        { id: 'knowledgeHCPCS', value: 'hcpcs', label: 'HCPCS Codes', desc: 'Healthcare Common Procedure Coding System', checked: false },
+                        { id: 'knowledgeMedicalBilling', value: 'medical-billing', label: 'Medical Billing', desc: 'Best practices for medical billing', checked: false }
+                    ];
+                    break;
+                
+                case 'data-analysis':
+                    coreCapabilities = [
+                        { id: 'capabilityQA', value: 'qa', label: 'Question Answering', desc: 'Respond to data analysis queries', checked: true },
+                        { id: 'capabilityDataAnalysis', value: 'data-analysis', label: 'Data Analysis', desc: 'Process and analyze datasets', checked: true },
+                        { id: 'capabilityDataVisualization', value: 'data-visualization', label: 'Data Visualization', desc: 'Generate visualizations from data', checked: false },
+                        { id: 'capabilityDocSummarization', value: 'document-summarization', label: 'Document Summarization', desc: 'Summarize analytical findings', checked: true },
+                        { id: 'capabilityPredictiveAnalysis', value: 'predictive-analysis', label: 'Predictive Analysis', desc: 'Forecast trends from historical data', checked: false }
+                    ];
+                    
+                    knowledgeBases = [
+                        { id: 'knowledgeStatistics', value: 'statistics', label: 'Statistical Methods', desc: 'Data analysis and statistical techniques', checked: true },
+                        { id: 'knowledgeML', value: 'machine-learning', label: 'Machine Learning', desc: 'ML algorithms and applications', checked: false },
+                        { id: 'knowledgeBusinessIntelligence', value: 'business-intelligence', label: 'Business Intelligence', desc: 'BI tools and methodologies', checked: false },
+                        { id: 'knowledgeDomainSpecific', value: 'domain-specific', label: 'Domain Knowledge', desc: 'Industry-specific analytical contexts', checked: false }
+                    ];
+                    break;
+                
+                case 'customer-support':
+                    coreCapabilities = [
+                        { id: 'capabilityQA', value: 'qa', label: 'Question Answering', desc: 'Respond to customer queries', checked: true },
+                        { id: 'capabilityDocSummarization', value: 'document-summarization', label: 'Document Summarization', desc: 'Summarize support documentation', checked: true },
+                        { id: 'capabilityTicketManagement', value: 'ticket-management', label: 'Ticket Management', desc: 'Classify and prioritize support tickets', checked: false },
+                        { id: 'capabilitySentimentAnalysis', value: 'sentiment-analysis', label: 'Sentiment Analysis', desc: 'Detect customer sentiment in messages', checked: false },
+                        { id: 'capabilityMultilingual', value: 'multilingual', label: 'Multilingual Support', desc: 'Support in multiple languages', checked: false }
+                    ];
+                    
+                    knowledgeBases = [
+                        { id: 'knowledgeProductInfo', value: 'product-info', label: 'Product Information', desc: 'Product details, specifications, and FAQs', checked: true },
+                        { id: 'knowledgeSupportProtocols', value: 'support-protocols', label: 'Support Protocols', desc: 'Standard support procedures and escalation paths', checked: false },
+                        { id: 'knowledgeCommonIssues', value: 'common-issues', label: 'Common Issues', desc: 'Frequently reported problems and solutions', checked: false },
+                        { id: 'knowledgeCustomerHistory', value: 'customer-history', label: 'Customer History', desc: 'Past interactions and resolutions', checked: false }
+                    ];
+                    break;
+                
+                default: // blank template
+                    coreCapabilities = [
+                        { id: 'capabilityQA', value: 'qa', label: 'Question Answering', desc: 'Respond to user queries from a knowledge base', checked: false },
+                        { id: 'capabilityMedicalCoding', value: 'medical-coding', label: 'Medical Coding Analysis', desc: 'Review and validate medical codes', checked: false },
+                        { id: 'capabilityDataAnalysis', value: 'data-analysis', label: 'Data Analysis', desc: 'Process and analyze datasets', checked: false },
+                        { id: 'capabilityDocSummarization', value: 'document-summarization', label: 'Document Summarization', desc: 'Summarize documents and extract key information', checked: false }
+                    ];
+                    
+                    knowledgeBases = [
+                        { id: 'knowledgeICD10', value: 'icd10', label: 'ICD-10 Codes', desc: 'International Classification of Diseases', checked: false },
+                        { id: 'knowledgeCPT', value: 'cpt', label: 'CPT Codes', desc: 'Current Procedural Terminology', checked: false },
+                        { id: 'knowledgeProductInfo', value: 'product-info', label: 'Product Information', desc: 'Product details, specifications, and FAQs', checked: false },
+                        { id: 'knowledgeStatistics', value: 'statistics', label: 'Statistical Methods', desc: 'Data analysis and statistical techniques', checked: false }
+                    ];
+                    break;
+            }
+            
+            // Generate core capabilities HTML
+            coreCapabilities.forEach(capability => {
+                const capabilityHTML = generateCapabilityCheckbox(capability);
+                coreCapabilitiesContainer.innerHTML += capabilityHTML;
+            });
+            
+            // Generate knowledge bases HTML
+            knowledgeBases.forEach(knowledge => {
+                const knowledgeHTML = generateCapabilityCheckbox(knowledge);
+                knowledgeContainer.innerHTML += knowledgeHTML;
+            });
+            
+            // Add highlight class to important capabilities
+            highlightImportantCapabilities(templateId);
+        }
+        
+        // Helper function to generate a capability checkbox
+        function generateCapabilityCheckbox(capability) {
+            return `
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="${capability.id}" name="capabilities" value="${capability.value}" ${capability.checked ? 'checked' : ''}>
+                    <label class="form-check-label" for="${capability.id}">
+                        ${capability.label}
+                        <div class="text-muted small">${capability.desc}</div>
+                    </label>
+                </div>
+            `;
+        }
+        
+        // Function to highlight important capabilities based on template
+        function highlightImportantCapabilities(templateId) {
+            let importantCapabilities = [];
+            
+            switch(templateId) {
+                case 'medical-coding':
+                    importantCapabilities = ['medical-coding', 'icd10', 'cpt'];
+                    break;
+                case 'data-analysis':
+                    importantCapabilities = ['data-analysis', 'statistics', 'data-visualization'];
+                    break;
+                case 'customer-support':
+                    importantCapabilities = ['qa', 'product-info', 'ticket-management'];
+                    break;
+                default:
+                    return; // No highlights for blank template
+            }
+            
+            // Add highlight class to important capabilities
+            document.querySelectorAll('#step3 .form-check').forEach(formCheck => {
+                formCheck.classList.remove('highlighted-capability');
+                
+                const input = formCheck.querySelector('input[type="checkbox"]');
+                if (!input) return;
+                
+                if (importantCapabilities.includes(input.value)) {
+                    formCheck.classList.add('highlighted-capability');
+                }
+            });
+        }
+        
+        // Function to populate form fields based on selected template
+        function populateFormFields() {
+            const templateId = window.selectedTemplateType;
+            
+            if (!templateId) {
+                console.log("No template selected");
+                return;
+            }
+            
+            console.log(`Populating form for template: ${templateId}`);
+            
+            // Get form elements
+            const agentName = document.getElementById('agentName');
+            const agentDescription = document.getElementById('agentDescription');
+            const agentCategory = document.getElementById('agentCategory');
+            
+            // Capability checkboxes
+            const capabilityQA = document.getElementById('capabilityQA');
+            const capabilityMedicalCoding = document.getElementById('capabilityMedicalCoding');
+            const capabilityDataAnalysis = document.getElementById('capabilityDataAnalysis');
+            const capabilityDocSummarization = document.getElementById('capabilityDocSummarization');
+            
+            // Knowledge checkboxes
+            const knowledgeICD10 = document.getElementById('knowledgeICD10');
+            const knowledgeCPT = document.getElementById('knowledgeCPT');
+            const knowledgeProductInfo = document.getElementById('knowledgeProductInfo');
+            const knowledgeStatistics = document.getElementById('knowledgeStatistics');
+            
+            // Reset all checkboxes first
+            [capabilityQA, capabilityMedicalCoding, capabilityDataAnalysis, capabilityDocSummarization,
+             knowledgeICD10, knowledgeCPT, knowledgeProductInfo, knowledgeStatistics].forEach(checkbox => {
+                if (checkbox) checkbox.checked = false;
+            });
+            
+            // Populate based on template
+            switch(templateId) {
+                case 'medical-coding':
+                    if (agentName) agentName.value = "Medical Coding Review Agent";
+                    if (agentDescription) agentDescription.value = "An AI agent designed to review medical coding for accuracy, compliance, and optimization. Helps identify coding errors, ensures proper code pairing, and suggests improvements for better reimbursement rates.";
+                    if (agentCategory) agentCategory.value = "healthcare";
+                    
+                    // Set capabilities
+                    if (capabilityQA) capabilityQA.checked = true;
+                    if (capabilityMedicalCoding) capabilityMedicalCoding.checked = true;
+                    if (capabilityDocSummarization) capabilityDocSummarization.checked = true;
+                    
+                    // Set knowledge
+                    if (knowledgeICD10) knowledgeICD10.checked = true;
+                    if (knowledgeCPT) knowledgeCPT.checked = true;
+                    break;
+                    
+                case 'data-analysis':
+                    if (agentName) agentName.value = "Data Analysis Assistant";
+                    if (agentDescription) agentDescription.value = "A specialized AI agent that processes and analyzes data to uncover insights and patterns. Provides statistical analysis, visualization recommendations, and helps interpret complex datasets.";
+                    if (agentCategory) agentCategory.value = "analytics";
+                    
+                    // Set capabilities
+                    if (capabilityQA) capabilityQA.checked = true;
+                    if (capabilityDataAnalysis) capabilityDataAnalysis.checked = true;
+                    if (capabilityDocSummarization) capabilityDocSummarization.checked = true;
+                    
+                    // Set knowledge
+                    if (knowledgeStatistics) knowledgeStatistics.checked = true;
+                    break;
+                    
+                case 'customer-support':
+                    if (agentName) agentName.value = "Customer Support Assistant";
+                    if (agentDescription) agentDescription.value = "An AI agent designed to provide prompt and accurate customer support. Answers product questions, handles common issues, and escalates complex problems when necessary.";
+                    if (agentCategory) agentCategory.value = "customer-service";
+                    
+                    // Set capabilities
+                    if (capabilityQA) capabilityQA.checked = true;
+                    if (capabilityDocSummarization) capabilityDocSummarization.checked = true;
+                    
+                    // Set knowledge
+                    if (knowledgeProductInfo) knowledgeProductInfo.checked = true;
+                    break;
+                    
+                case 'blank':
+                    if (agentName) agentName.value = "";
+                    if (agentDescription) agentDescription.value = "";
+                    if (agentCategory) agentCategory.value = "other";
+                    break;
+            }
+            
+            console.log(`Template ${templateId} populated successfully`);
+        }
+    </script>
+</body>
+</html>

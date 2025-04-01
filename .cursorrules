@@ -1,0 +1,199 @@
+// Pydantic and Object-Oriented Programming Rules for Agentic Agents
+
+// HUMAN INTERACTION REQUIREMENTS
+- Do NOT code right away. Ask questions to the human about your understand or lack there of.
+- Think about the problem before coding. Then present your highlevel approach for feedback.
+
+// OBJECT-ORIENTED PROGRAMMING RULES
+
+// 1. Class Structure
+- Each class should have a clear, single responsibility
+- Use descriptive class names in PascalCase (e.g., `AgentConfig`, not `agent_config`)
+- Include docstrings for all classes explaining their purpose and behavior
+- Organize methods in a logical order: constructor, public methods, private methods
+
+// 2. Encapsulation
+- Use private attributes with leading underscores (e.g., `self._private_attr`)
+- Provide getter/setter methods or properties for controlled access to attributes
+- Validate data in setters to maintain object integrity
+- Don't expose implementation details unnecessarily
+
+// 3. Inheritance
+- Prefer composition over inheritance when appropriate
+- Use inheritance for "is-a" relationships, not "has-a" relationships
+- Keep inheritance hierarchies shallow (avoid deep nesting)
+- Always call `super().__init__()` in subclass constructors when appropriate
+- Use abstract base classes for defining interfaces
+
+// 4. Polymorphism
+- Design methods with consistent signatures across related classes
+- Override methods completely rather than partially when possible
+- Use duck typing appropriately (if it walks like a duck and quacks like a duck...)
+- Implement magic methods (`__str__`, `__repr__`, etc.) for better integration
+
+// 4.1 Dunder Methods Implementation
+- Implement `__str__` to provide human-readable string representations of data objects
+- Implement `__repr__` to provide unambiguous, developer-friendly representations that ideally can be used to recreate the object
+- Use `__eq__` and `__hash__` for proper equality comparison and hashing in collections (especially for patient identifiers and medical records)
+- Implement `__lt__`, `__gt__`, etc. for objects that have natural ordering (e.g., timestamps, lab values, vital signs)
+- Use `__getitem__`, `__setitem__`, and `__delitem__` for objects that act as containers of medical data
+- Implement `__len__` for collections to return meaningful counts (e.g., number of records, observations)
+- Consider `__bool__` to define truthiness based on clinical significance (e.g., whether a lab result is abnormal)
+- Use `__enter__` and `__exit__` for resource management (e.g., database connections, file handles for large datasets)
+- Implement `__call__` to make objects callable when they represent functions or transformations on medical data
+- For data processing pipelines, implement `__iter__` and `__next__` to enable iteration over patient records or time series data
+- When appropriate, implement arithmetic dunder methods (`__add__`, `__sub__`, etc.) for mathematical operations on medical measurements
+- Document all dunder method implementations with clear explanations of their behavior and constraints
+
+// 5. Method Design
+- Methods should have a single responsibility
+- Use verb phrases for method names (e.g., `process_data()`, not `data_processor()`)
+- Keep methods reasonably short (aim for under 20-30 lines)
+- Return new objects rather than modifying in place when appropriate
+
+// PYDANTIC RULES
+
+// 1. Model Definition
+- Create Pydantic models for all complex data structures
+- Use descriptive field names in snake_case
+- Always specify types for all fields
+- Use appropriate Pydantic field types (e.g., `EmailStr` for emails)
+- Include field descriptions using the `Field` constructor
+
+// 2. Validation
+- Use validators for complex field validation
+- Implement custom validators with `@validator` or `@root_validator` decorators
+- Chain validators when multiple validation steps are needed
+- Use `pre=True` for validators that need to run before type conversion
+
+// 3. Type Annotations
+- Use specific types rather than generic ones (e.g., `List[str]` not just `List`)
+- Leverage Union types for fields that can accept multiple types
+- Use Optional for fields that can be None
+- Define custom types for domain-specific concepts
+
+// 4. Model Configuration
+- Use the `Config` class to customize model behavior
+- Set `orm_mode = True` when working with ORMs
+- Configure `extra = 'forbid'` to prevent unexpected fields
+- Use `alias_generator` for field name transformations
+
+// 5. Nested Models
+- Create nested models for complex hierarchical data
+- Use composition of models to represent relationships
+- Leverage `from_orm` for converting ORM objects to Pydantic models
+- Use `model_dump()` (v2) or `dict()` (v1) to convert to dictionaries
+
+// 6. Schema Management
+- Generate JSON schemas from models for documentation
+- Use `schema_extra` in Config for additional schema information
+- Create response models separate from internal models
+- Version your models when making breaking changes
+
+// INTEGRATION OF OOP AND PYDANTIC
+
+// 1. Model-Service Pattern
+- Use Pydantic models for data representation
+- Implement service classes that operate on these models
+- Keep validation logic in models, business logic in services
+
+// 2. Repository Pattern
+- Use Pydantic models as the return type from repositories
+- Convert database entities to Pydantic models at the repository boundary
+- Annotate repository methods with appropriate return types
+
+// 3. API Design
+- Define request and response models with Pydantic
+- Use inheritance for related API models
+- Implement validation at the API boundary
+- Return meaningful validation errors
+
+// 4. Testing
+- Create factory functions for generating test models
+- Test validation rules explicitly
+- Mock services that consume models
+- Use parametrized tests for validation edge cases
+
+// PROJECT-SPECIFIC RULES
+
+// 1. Agent Implementation
+- All agents must inherit from the base Agent class
+- Agent configurations must use appropriate Pydantic models
+- Implement the abstract process() method in all agent subclasses
+- Use proper error handling and validation in all API calls
+
+// 2. Data Validation
+- All external data must be validated using Pydantic models
+- Dataset inputs must be validated before processing
+- API responses must be parsed into appropriate models
+- Configuration files must be validated against schema
+
+// 3. Error Handling
+- Use specific exception types for different error scenarios
+- Provide meaningful error messages with context
+- Handle API errors gracefully with appropriate fallbacks
+- Log errors with sufficient detail for debugging
+
+// 4. Performance Considerations
+- Limit history sizes to prevent memory issues
+- Use asynchronous API calls when appropriate
+- Implement caching for expensive operations
+- Monitor and optimize processing times
+
+
+
+// DOCUMENTATION REQUIREMENTS
+
+// 1. Module Documentation
+- Include a comprehensive module docstring at the top of each file
+- Explain the module's purpose, responsibilities, and relationships to other modules
+- Document any design patterns or architectural decisions
+- List any external dependencies and their versions
+
+// 2. Class Documentation
+- Document all classes with detailed docstrings
+- Clearly state the class's responsibility and lifecycle
+- Describe behavioral characteristics (stateful vs stateless, thread safety, etc.)
+- Document class invariants and assumptions
+- Explain inheritance relationships and why they exist
+
+// 3. Method Documentation
+- Document all public methods with docstrings
+- Specify preconditions and postconditions
+- Document parameters with types and descriptions
+- Describe return values and their significance
+- List exceptions that may be raised and under what conditions
+- Explain side effects and state changes
+
+// 4. Behavioral Documentation
+- Document concurrency behavior (thread safety, async patterns)
+- Specify performance characteristics (time/space complexity, expected latency)
+- Document resource usage (memory, network, disk, API calls)
+- Explain error handling and recovery strategies
+- Document retry policies and backoff strategies
+- Specify timeout behavior and fallback mechanisms
+
+// 5. Model Documentation
+- Document validation rules and their business significance
+- Explain relationships between models
+- Document default values and their rationale
+- Specify serialization/deserialization behavior
+- Document any special handling for optional fields
+
+// 6. Code Examples
+- Include usage examples for complex components
+- Provide examples of expected inputs and outputs
+- Document common patterns and anti-patterns
+- Include examples of error handling
+
+// 7. Configuration Documentation
+- Document all configuration options
+- Explain the impact of each configuration setting
+- Provide recommended values for different scenarios
+- Document environment variable dependencies
+
+// 8. Testing Documentation
+- Document the testing strategy for each component
+- Explain how to test edge cases and error conditions
+- Document test fixtures and their purpose
+- Provide examples of mocking dependencies 

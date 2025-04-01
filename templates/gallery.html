@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Ailevate AMI Agent Creator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../assets/images/ailevate-logo-blue-orange.svg" alt="Ailevate" height="40" class="me-2">AMI Agent Creator
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="create.html">Create Agent</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="docs.html">Documentation</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="mb-2">Agent Gallery</h1>
+        <p class="text-muted mb-4">Browse pre-configured agent templates and examples for different use cases.</p>
+        
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search agents...">
+                    <button class="btn btn-primary" type="button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <select class="form-select">
+                    <option selected>All Categories</option>
+                    <option>Healthcare</option>
+                    <option>Customer Service</option>
+                    <option>Analytics</option>
+                    <option>Education</option>
+                    <option>Productivity</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Medical Coding Review Agent -->
+            <div class="col-md-4">
+                <div class="card h-100 agent-card">
+                    <div class="card-body">
+                        <span class="badge bg-primary mb-2">Healthcare</span>
+                        <h4 class="card-title">Medical Coding Review Agent</h4>
+                        <p class="card-text">Reviews procedure and diagnostic codes for errors, compliance issues, and optimization opportunities.</p>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="text-muted me-2">Capabilities:</span>
+                            <span class="badge bg-light text-dark me-1">ICD-10</span>
+                            <span class="badge bg-light text-dark">CPT</span>
+                        </div>
+                        <div class="card-text small text-muted mb-3">
+                            <i class="bi bi-info-circle me-1"></i> Based on Claude 3 Sonnet
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#yamlModal1">View YAML</a>
+                            <a href="create.html" class="btn btn-sm btn-primary">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Data Analysis Agent -->
+            <div class="col-md-4">
+                <div class="card h-100 agent-card">
+                    <div class="card-body">
+                        <span class="badge bg-primary mb-2">Analytics</span>
+                        <h4 class="card-title">Data Analysis Agent</h4>
+                        <p class="card-text">Processes and analyzes data sets, generating insights and visualizations for business intelligence.</p>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="text-muted me-2">Capabilities:</span>
+                            <span class="badge bg-light text-dark me-1">Statistics</span>
+                            <span class="badge bg-light text-dark">Visualization</span>
+                        </div>
+                        <div class="card-text small text-muted mb-3">
+                            <i class="bi bi-info-circle me-1"></i> Based on Claude 3 Opus
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#yamlModal2">View YAML</a>
+                            <a href="create.html" class="btn btn-sm btn-primary">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Customer Support Agent -->
+            <div class="col-md-4">
+                <div class="card h-100 agent-card">
+                    <div class="card-body">
+                        <span class="badge bg-primary mb-2">Customer Service</span>
+                        <h4 class="card-title">Customer Support Agent</h4>
+                        <p class="card-text">Handles customer inquiries, troubleshoots common issues, and manages support tickets.</p>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="text-muted me-2">Capabilities:</span>
+                            <span class="badge bg-light text-dark me-1">FAQ</span>
+                            <span class="badge bg-light text-dark">Troubleshooting</span>
+                        </div>
+                        <div class="card-text small text-muted mb-3">
+                            <i class="bi bi-info-circle me-1"></i> Based on Claude 3 Haiku
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#yamlModal3">View YAML</a>
+                            <a href="create.html" class="btn btn-sm btn-primary">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Legal Document Reviewer -->
+            <div class="col-md-4">
+                <div class="card h-100 agent-card">
+                    <div class="card-body">
+                        <span class="badge bg-primary mb-2">Legal</span>
+                        <h4 class="card-title">Legal Document Reviewer</h4>
+                        <p class="card-text">Reviews legal documents, identifies key clauses, and flags potential issues or inconsistencies.</p>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="text-muted me-2">Capabilities:</span>
+                            <span class="badge bg-light text-dark me-1">Contract Review</span>
+                            <span class="badge bg-light text-dark">Legal Analysis</span>
+                        </div>
+                        <div class="card-text small text-muted mb-3">
+                            <i class="bi bi-info-circle me-1"></i> Based on Claude 3 Opus
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-sm btn-outline-primary">View YAML</a>
+                            <a href="create.html" class="btn btn-sm btn-primary">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Educational Tutor -->
+            <div class="col-md-4">
+                <div class="card h-100 agent-card">
+                    <div class="card-body">
+                        <span class="badge bg-primary mb-2">Education</span>
+                        <h4 class="card-title">Educational Tutor</h4>
+                        <p class="card-text">Provides personalized tutoring in various subjects with adaptive learning techniques.</p>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="text-muted me-2">Capabilities:</span>
+                            <span class="badge bg-light text-dark me-1">Subject Expertise</span>
+                            <span class="badge bg-light text-dark">Assessment</span>
+                        </div>
+                        <div class="card-text small text-muted mb-3">
+                            <i class="bi bi-info-circle me-1"></i> Based on Claude 3 Sonnet
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-sm btn-outline-primary">View YAML</a>
+                            <a href="create.html" class="btn btn-sm btn-primary">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project Manager Assistant -->
+            <div class="col-md-4">
+                <div class="card h-100 agent-card">
+                    <div class="card-body">
+                        <span class="badge bg-primary mb-2">Productivity</span>
+                        <h4 class="card-title">Project Manager Assistant</h4>
+                        <p class="card-text">Helps manage projects, track tasks, and generate status reports and timelines.</p>
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="text-muted me-2">Capabilities:</span>
+                            <span class="badge bg-light text-dark me-1">Task Tracking</span>
+                            <span class="badge bg-light text-dark">Reporting</span>
+                        </div>
+                        <div class="card-text small text-muted mb-3">
+                            <i class="bi bi-info-circle me-1"></i> Based on Claude 3 Haiku
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="d-flex justify-content-between">
+                            <a href="#" class="btn btn-sm btn-outline-primary">View YAML</a>
+                            <a href="create.html" class="btn btn-sm btn-primary">Use Template</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="mt-5">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- YAML Modal for Medical Coding Review Agent -->
+    <div class="modal fade" id="yamlModal1" tabindex="-1" aria-labelledby="yamlModalLabel1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="yamlModalLabel1">Medical Coding Review Agent YAML</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="yaml-output">
+<pre>
+model: medical-coding-review-agent
+label:
+  en_US: Medical Coding Review Agent
+model_type: llm
+features:
+- agent-thought
+- tool-use
+description:
+  en_US: An AI agent that reviews medical procedure and diagnostic codes for errors, compliance issues, and optimization opportunities.
+knowledge_bases:
+- icd10
+- cpt
+- medical-billing
+- healthcare-compliance
+model_properties:
+  mode: chat
+  context_size: 16000
+parameter_rules:
+- name: temperature
+  use_template: temperature
+  default: 0.7
+- name: top_p
+  use_template: top_p
+  default: 0.9
+- name: max_tokens
+  use_template: max_tokens
+  default: 1024
+capabilities:
+  code_validation:
+    enabled: true
+    description: Validates ICD-10 and CPT codes for accuracy and completeness
+  code_pairing:
+    enabled: true
+    description: Checks for proper pairing between diagnostic and procedure codes
+  compliance_check:
+    enabled: true
+    description: Identifies potential compliance issues with coding guidelines
+  reimbursement_optimization:
+    enabled: true
+    description: Suggests coding optimizations to improve reimbursement outcomes
+  documentation_guidance:
+    enabled: true
+    description: Provides guidance on documentation requirements for specific codes
+tools:
+  icd10_database:
+    enabled: true
+    description: Tool to query ICD-10 diagnostic code database
+  cpt_database:
+    enabled: true
+    description: Tool to query CPT procedure code database
+  coding_guidelines:
+    enabled: true
+    description: Tool to access coding guidelines and regulations
+pricing:
+  input: '0.00'
+  output: '0.00'
+  unit: '0.000001'
+  currency: USD
+</pre>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Copy YAML</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YAML Modal for Data Analysis Agent -->
+    <div class="modal fade" id="yamlModal2" tabindex="-1" aria-labelledby="yamlModalLabel2" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="yamlModalLabel2">Data Analysis Agent YAML</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="yaml-output">
+<pre>
+model: data-analysis-agent
+label:
+  en_US: Data Analysis Agent
+model_type: llm
+features:
+- agent-thought
+- tool-use
+description:
+  en_US: An AI agent that processes and analyzes data sets, generating insights and visualizations for business intelligence.
+knowledge_bases:
+- statistics
+- data-visualization
+- business-intelligence
+model_properties:
+  mode: chat
+  context_size: 100000
+parameter_rules:
+- name: temperature
+  use_template: temperature
+  default: 0.6
+- name: top_p
+  use_template: top_p
+  default: 0.9
+- name: max_tokens
+  use_template: max_tokens
+  default: 2048
+capabilities:
+  data_processing:
+    enabled: true
+    description: Processes raw data into structured formats for analysis
+  statistical_analysis:
+    enabled: true
+    description: Performs statistical calculations and tests on data sets
+  pattern_recognition:
+    enabled: true
+    description: Identifies patterns, trends, and anomalies in data
+  visualization_generation:
+    enabled: true
+    description: Creates visual representations of data and insights
+  insights_reporting:
+    enabled: true
+    description: Generates reports and summaries of key findings
+tools:
+  data_processor:
+    enabled: true
+    description: Tool to clean and transform data
+  statistical_calculator:
+    enabled: true
+    description: Tool to perform statistical calculations
+  chart_generator:
+    enabled: true
+    description: Tool to create charts and graphs
+pricing:
+  input: '0.00'
+  output: '0.00'
+  unit: '0.000001'
+  currency: USD
+</pre>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Copy YAML</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YAML Modal for Customer Support Agent -->
+    <div class="modal fade" id="yamlModal3" tabindex="-1" aria-labelledby="yamlModalLabel3" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="yamlModalLabel3">Customer Support Agent YAML</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="yaml-output">
+<pre>
+model: customer-support-agent
+label:
+  en_US: Customer Support Agent
+model_type: llm
+features:
+- agent-thought
+- tool-use
+description:
+  en_US: An AI agent that handles customer inquiries, troubleshoots common issues, and manages support tickets.
+knowledge_bases:
+- product-information
+- troubleshooting-guides
+- faq
+model_properties:
+  mode: chat
+  context_size: 8000
+parameter_rules:
+- name: temperature
+  use_template: temperature
+  default: 0.7
+- name: top_p
+  use_template: top_p
+  default: 0.9
+- name: max_tokens
+  use_template: max_tokens
+  default: 1024
+capabilities:
+  inquiry_handling:
+    enabled: true
+    description: Responds to customer questions about products and services
+  troubleshooting:
+    enabled: true
+    description: Helps diagnose and resolve common technical issues
+  ticket_management:
+    enabled: true
+    description: Creates and updates support tickets in the system
+  escalation:
+    enabled: true
+    description: Identifies when to escalate issues to human agents
+  follow_up:
+    enabled: true
+    description: Schedules and conducts follow-up communications
+tools:
+  knowledge_base:
+    enabled: true
+    description: Tool to search product information and support docs
+  ticket_system:
+    enabled: true
+    description: Tool to create and manage support tickets
+  customer_history:
+    enabled: true
+    description: Tool to access customer interaction history
+pricing:
+  input: '0.00'
+  output: '0.00'
+  unit: '0.000001'
+  currency: USD
+</pre>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Copy YAML</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2025 Ailevate, Inc. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-decoration-none text-secondary me-3">Privacy Policy</a>
+                    <a href="#" class="text-decoration-none text-secondary me-3">Terms of Service</a>
+                    <a href="#" class="text-decoration-none text-secondary">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

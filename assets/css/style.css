@@ -1,0 +1,284 @@
+:root {
+    /* Ailevate Primary Colors */
+    --royal-blue: #1f22a2;   /* Primary brand color */
+    --tatooine-dawn: #eb5d29; /* Secondary brand color */
+    --solar-eclipse: #FF9016; 
+    --lunar-dust: #e5dfd9;
+    --deathstar-gray: #9eadbd;
+    --space-black: #252525;
+    
+    /* Ailevate Secondary Colors */
+    --midnight-blue: #1e5689;
+    --sky-blue: #3b8fc9;
+    --hyperdrive-blue: #00b1e5;
+    
+    /* Using the brand colors for our UI */
+    --primary-color: var(--royal-blue);
+    --secondary-color: var(--tatooine-dawn);
+    --accent-color: var(--solar-eclipse);
+    --text-color: var(--space-black);
+    --light-gray: var(--lunar-dust);
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+.navbar-dark .navbar-brand,
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
+
+.navbar-dark .navbar-nav .nav-link.active {
+    font-weight: 600;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--midnight-blue);
+    border-color: var(--midnight-blue);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.feature-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    font-size: 2rem;
+    border-radius: 0.75rem;
+}
+
+.step-card {
+    background-color: var(--light-gray);
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    height: 100%;
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+/* Wizard Form Styles */
+.form-wizard .nav-pills .nav-link {
+    border-radius: 0;
+    padding: 1rem;
+    color: var(--text-color);
+    position: relative;
+}
+
+.form-wizard .nav-pills .nav-link.active {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.form-wizard .nav-pills .nav-link:not(.active) {
+    opacity: 0.7;
+}
+
+.wizard-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.form-wizard .nav-pills .nav-link:not(.active) .wizard-number {
+    background-color: #ccc;
+}
+
+.wizard-content {
+    padding: 2rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    margin-top: 1rem;
+}
+
+/* Card Styles */
+.agent-card {
+    transition: transform 0.3s ease;
+}
+
+.agent-card:hover {
+    transform: translateY(-5px);
+}
+
+/* YAML Output */
+.yaml-output {
+    background-color: #282c34;
+    color: #abb2bf;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    overflow-x: auto;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.yaml-key {
+    color: var(--hyperdrive-blue);
+}
+
+.yaml-string {
+    color: var(--solar-eclipse);
+}
+
+.yaml-number {
+    color: var(--tatooine-dawn);
+}
+
+/* Documentation Styles */
+.doc-nav {
+    position: sticky;
+    top: 2rem;
+}
+
+.doc-nav .nav-link {
+    padding: 0.5rem 1rem;
+    color: var(--text-color);
+}
+
+.doc-nav .nav-link.active {
+    color: var(--primary-color);
+    font-weight: 600;
+    border-left: 2px solid var(--secondary-color);
+}
+
+/* Preview Component */
+.agent-preview {
+    background-color: var(--light-gray);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.preview-message {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+}
+
+.user-message {
+    background-color: #e2e3e5;
+    border-radius: 0 0.5rem 0.5rem 0.5rem;
+    align-self: flex-start;
+}
+
+.agent-message {
+    background-color: rgba(31, 34, 162, 0.15);
+    border-radius: 0.5rem 0 0.5rem 0.5rem;
+    align-self: flex-end;
+    border-left: 3px solid var(--royal-blue);
+}
+
+/* Form Controls */
+.custom-control-input:checked ~ .custom-control-label::before {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* OODA Loop Styles */
+.ooda-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    font-size: 2rem;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.bg-royal-blue {
+    background-color: var(--royal-blue);
+}
+
+.bg-tatooine-dawn {
+    background-color: var(--tatooine-dawn);
+}
+
+.bg-solar-eclipse {
+    background-color: var(--solar-eclipse);
+}
+
+.bg-midnight-blue {
+    background-color: var(--midnight-blue);
+}
+
+.ooda-step {
+    position: relative;
+}
+
+.ooda-step::after {
+    content: "";
+    position: absolute;
+    top: 2rem;
+    right: -1rem;
+    width: 2rem;
+    height: 2px;
+    background-color: #dee2e6;
+    display: none;
+}
+
+.col-md-3:not(:last-child) .ooda-step::after {
+    display: block;
+}
+
+.metric-item .form-control,
+.metric-item .form-select {
+    border-radius: 0.25rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .wizard-content {
+        padding: 1rem;
+    }
+    
+    .step-number, .wizard-number {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.25rem;
+    }
+    
+    .ooda-step::after {
+        display: none;
+    }
+}

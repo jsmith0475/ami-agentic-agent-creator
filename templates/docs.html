@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - Ailevate AMI Agent Creator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">
+                <img src="../assets/images/ailevate-logo-blue-orange.svg" alt="Ailevate" height="40" class="me-2">AMI Agent Creator
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="create.html">Create Agent</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="docs.html">Documentation</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="doc-nav">
+                    <div class="list-group">
+                        <a href="#getting-started" class="list-group-item list-group-item-action active">Getting Started</a>
+                        <a href="#agent-creation" class="list-group-item list-group-item-action">Agent Creation</a>
+                        <a href="#capabilities" class="list-group-item list-group-item-action">Capabilities</a>
+                        <a href="#model-settings" class="list-group-item list-group-item-action">Model Settings</a>
+                        <a href="#yaml-structure" class="list-group-item list-group-item-action">YAML Structure</a>
+                        <a href="#dify-integration" class="list-group-item list-group-item-action">Dify.ai Integration</a>
+                        <a href="#best-practices" class="list-group-item list-group-item-action">Best Practices</a>
+                        <a href="#faq" class="list-group-item list-group-item-action">FAQ</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-9">
+                <h1 class="mb-4">Documentation</h1>
+                
+                <section id="getting-started" class="mb-5">
+                    <h2 class="border-bottom pb-2">Getting Started</h2>
+                    <p>The Ailevate AMI Agent Creator is a no-code platform that enables users to create specialized AI agents without programming experience. This documentation will guide you through the process of creating, configuring, and deploying your own custom agents.</p>
+                    
+                    <h4 class="mt-4">What Are Ailevate AMI Agents?</h4>
+                    <p>Ailevate AMI (Artificial Machine Intelligence) Agents are specialized AI assistants designed to perform specific tasks or serve particular domains. These agents are powered by large language models (LLMs) but are configured with specific capabilities, knowledge bases, and behaviors to make them experts in their designated areas.</p>
+                    
+                    <h4 class="mt-4">Key Concepts</h4>
+                    <ul>
+                        <li><strong>Agent</strong>: An AI assistant with a specific purpose and set of capabilities</li>
+                        <li><strong>Capabilities</strong>: The specific skills and functions an agent can perform</li>
+                        <li><strong>Knowledge Base</strong>: Domain-specific information the agent has access to</li>
+                        <li><strong>Model Settings</strong>: Configuration of the underlying AI model</li>
+                        <li><strong>YAML Configuration</strong>: The structured format that defines an agent's properties</li>
+                    </ul>
+                </section>
+                
+                <section id="agent-creation" class="mb-5">
+                    <h2 class="border-bottom pb-2">Agent Creation Process</h2>
+                    <p>Creating a new agent involves several steps:</p>
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 1: Choose a Template</h5>
+                            <p class="card-text">Start with a pre-configured template or build from scratch. Templates provide a foundation with pre-selected capabilities and settings for specific use cases.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 2: Define Basic Information</h5>
+                            <p class="card-text">Set your agent's name, description, and category. This information helps users understand what your agent does and how it can assist them.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 3: Configure Capabilities</h5>
+                            <p class="card-text">Select the specialized skills and knowledge bases your agent will have. These determine what tasks your agent can perform and what information it can access.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 4: Adjust Model Settings</h5>
+                            <p class="card-text">Configure the underlying AI model parameters such as model type, context size, and temperature. These settings affect how your agent processes information and generates responses.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Step 5: Preview and Export</h5>
+                            <p class="card-text">Test your agent's behavior through simulation and export the YAML configuration. This configuration can be imported into Dify.ai for deployment.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <section id="capabilities" class="mb-5">
+                    <h2 class="border-bottom pb-2">Capabilities</h2>
+                    <p>Capabilities define what your agent can do. Different types of agents require different sets of capabilities:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Capability</th>
+                                    <th>Description</th>
+                                    <th>Recommended For</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Question Answering</td>
+                                    <td>Answers questions based on a knowledge base</td>
+                                    <td>Support agents, educational agents</td>
+                                </tr>
+                                <tr>
+                                    <td>Medical Coding Analysis</td>
+                                    <td>Reviews and validates medical coding</td>
+                                    <td>Healthcare compliance agents</td>
+                                </tr>
+                                <tr>
+                                    <td>Data Analysis</td>
+                                    <td>Processes and analyzes datasets</td>
+                                    <td>Business intelligence agents, research assistants</td>
+                                </tr>
+                                <tr>
+                                    <td>Document Summarization</td>
+                                    <td>Creates concise summaries of documents</td>
+                                    <td>Legal assistants, research agents</td>
+                                </tr>
+                                <tr>
+                                    <td>Troubleshooting</td>
+                                    <td>Diagnoses and resolves technical issues</td>
+                                    <td>Technical support agents</td>
+                                </tr>
+                                <tr>
+                                    <td>Content Creation</td>
+                                    <td>Generates various types of content</td>
+                                    <td>Writing assistants, creative agents</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h4 class="mt-4">Knowledge Bases</h4>
+                    <p>Knowledge bases provide domain-specific information that your agent can access:</p>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Knowledge Base</th>
+                                    <th>Description</th>
+                                    <th>Recommended For</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ICD-10 Codes</td>
+                                    <td>International Classification of Diseases</td>
+                                    <td>Medical coding agents</td>
+                                </tr>
+                                <tr>
+                                    <td>CPT Codes</td>
+                                    <td>Current Procedural Terminology</td>
+                                    <td>Medical coding agents</td>
+                                </tr>
+                                <tr>
+                                    <td>Product Information</td>
+                                    <td>Details about products and services</td>
+                                    <td>Customer support agents</td>
+                                </tr>
+                                <tr>
+                                    <td>Statistical Methods</td>
+                                    <td>Statistical techniques and methodologies</td>
+                                    <td>Data analysis agents</td>
+                                </tr>
+                                <tr>
+                                    <td>Legal Documents</td>
+                                    <td>Legal terminology and document structures</td>
+                                    <td>Legal assistants</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                
+                <section id="model-settings" class="mb-5">
+                    <h2 class="border-bottom pb-2">Model Settings</h2>
+                    <p>Model settings determine how your agent processes information and generates responses:</p>
+                    
+                    <h4 class="mt-4">Model Type</h4>
+                    <p>The type of AI model that powers your agent:</p>
+                    <ul>
+                        <li><strong>LLM (Large Language Model)</strong>: For text generation and conversation</li>
+                        <li><strong>Text Embedding</strong>: For semantic search and retrieval</li>
+                        <li><strong>Rerank</strong>: For reordering search results by relevance</li>
+                    </ul>
+                    
+                    <h4 class="mt-4">Base Model</h4>
+                    <p>The foundation model to use for your agent:</p>
+                    <ul>
+                        <li><strong>Claude 3 Opus</strong>: Highest capability model, best for complex tasks</li>
+                        <li><strong>Claude 3 Sonnet</strong>: Balanced performance and efficiency</li>
+                        <li><strong>Claude 3 Haiku</strong>: Fastest and most efficient model</li>
+                        <li><strong>GPT-4</strong>: Advanced capabilities with strong reasoning</li>
+                        <li><strong>GPT-3.5 Turbo</strong>: Efficient model for general-purpose tasks</li>
+                    </ul>
+                    
+                    <h4 class="mt-4">Key Parameters</h4>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Description</th>
+                                    <th>Typical Range</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Context Size</td>
+                                    <td>Maximum context length the model can process</td>
+                                    <td>1,000 - 100,000 tokens</td>
+                                </tr>
+                                <tr>
+                                    <td>Temperature</td>
+                                    <td>Controls randomness in output (higher = more creative)</td>
+                                    <td>0.0 - 1.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Top P</td>
+                                    <td>Controls diversity of output (nucleus sampling)</td>
+                                    <td>0.0 - 1.0</td>
+                                </tr>
+                                <tr>
+                                    <td>Max Tokens</td>
+                                    <td>Maximum length of generated responses</td>
+                                    <td>100 - 4,096 tokens</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h4 class="mt-4">Advanced Features</h4>
+                    <ul>
+                        <li><strong>Agent Thought</strong>: Enables reasoning capabilities</li>
+                        <li><strong>Vision</strong>: Enables image understanding</li>
+                        <li><strong>Tool Usage</strong>: Enables interaction with external tools and APIs</li>
+                    </ul>
+                </section>
+                
+                <section id="yaml-structure" class="mb-5">
+                    <h2 class="border-bottom pb-2">YAML Structure</h2>
+                    <p>The YAML configuration defines all aspects of your agent. Here's an example of the structure:</p>
+                    
+                    <div class="yaml-output">
+<pre>
+model: agent-identifier
+label:
+  en_US: Agent Display Name
+model_type: llm
+features:
+- agent-thought
+- tool-use
+description:
+  en_US: Detailed description of what the agent does
+knowledge_bases:
+- knowledge-base-1
+- knowledge-base-2
+model_properties:
+  mode: chat
+  context_size: 16000
+parameter_rules:
+- name: temperature
+  use_template: temperature
+  default: 0.7
+- name: top_p
+  use_template: top_p
+  default: 0.9
+- name: max_tokens
+  use_template: max_tokens
+  default: 1024
+capabilities:
+  capability_1:
+    enabled: true
+    description: Description of the capability
+  capability_2:
+    enabled: true
+    description: Description of the capability
+tools:
+  tool_1:
+    enabled: true
+    description: Description of the tool
+  tool_2:
+    enabled: true
+    description: Description of the tool
+pricing:
+  input: '0.00'
+  output: '0.00'
+  unit: '0.000001'
+  currency: USD
+</pre>
+                    </div>
+                    
+                    <h4 class="mt-4">Key Sections</h4>
+                    <ul>
+                        <li><strong>model</strong>: Unique identifier for your agent</li>
+                        <li><strong>label</strong>: Display name in different languages</li>
+                        <li><strong>model_type</strong>: Type of AI model (llm, text-embedding, rerank)</li>
+                        <li><strong>features</strong>: List of enabled advanced features</li>
+                        <li><strong>description</strong>: Detailed description of what the agent does</li>
+                        <li><strong>knowledge_bases</strong>: List of knowledge sources the agent can access</li>
+                        <li><strong>model_properties</strong>: Core model configuration</li>
+                        <li><strong>parameter_rules</strong>: Model invocation parameters</li>
+                        <li><strong>capabilities</strong>: Specialized skills the agent has</li>
+                        <li><strong>tools</strong>: External tools the agent can use</li>
+                        <li><strong>pricing</strong>: Cost information for usage</li>
+                    </ul>
+                </section>
+                
+                <section id="dify-integration" class="mb-5">
+                    <h2 class="border-bottom pb-2">Dify.ai Integration</h2>
+                    <p>The Ailevate AMI Agent Creator generates YAML configurations that are compatible with Dify.ai, allowing you to deploy your custom agents to a production environment.</p>
+                    
+                    <h4 class="mt-4">Integration Steps</h4>
+                    <ol>
+                        <li>Export the YAML configuration from the AMI Agent Creator</li>
+                        <li>Log in to your Dify.ai account</li>
+                        <li>Navigate to "Models" section</li>
+                        <li>Select "Add Custom Model"</li>
+                        <li>Upload the YAML configuration file</li>
+                        <li>Configure any additional settings</li>
+                        <li>Deploy your agent</li>
+                    </ol>
+                    
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <strong>Note:</strong> Make sure your Dify.ai environment has access to the required AI models and knowledge bases specified in your configuration.
+                    </div>
+                </section>
+                
+                <section id="best-practices" class="mb-5">
+                    <h2 class="border-bottom pb-2">Best Practices</h2>
+                    <p>Follow these recommendations to create effective specialized agents:</p>
+                    
+                    <h4 class="mt-4">General Guidelines</h4>
+                    <ul>
+                        <li><strong>Focus on a specific domain</strong>: Create agents with a clear, focused purpose rather than trying to make them do everything.</li>
+                        <li><strong>Select appropriate capabilities</strong>: Only enable capabilities that are relevant to your agent's purpose.</li>
+                        <li><strong>Use descriptive names</strong>: Give your agent a name that clearly communicates its purpose and function.</li>
+                        <li><strong>Write detailed descriptions</strong>: Help users understand exactly what your agent can do with clear descriptions.</li>
+                    </ul>
+                    
+                    <h4 class="mt-4">Model Settings</h4>
+                    <ul>
+                        <li><strong>Match the model to the task</strong>: Use more capable models (like Claude 3 Opus) for complex tasks, and lighter models for simpler tasks.</li>
+                        <li><strong>Adjust temperature appropriately</strong>: Use lower values (0.0-0.4) for factual tasks, higher values (0.6-0.9) for creative tasks.</li>
+                        <li><strong>Set appropriate context size</strong>: Ensure your context size is large enough to handle your use case without being excessive.</li>
+                    </ul>
+                    
+                    <h4 class="mt-4">Testing</h4>
+                    <ul>
+                        <li><strong>Use the simulation feature</strong>: Test your agent with realistic queries before deployment.</li>
+                        <li><strong>Try edge cases</strong>: Test how your agent handles unusual or unexpected inputs.</li>
+                        <li><strong>Iterate based on feedback</strong>: Refine your agent configuration based on testing results.</li>
+                    </ul>
+                </section>
+                
+                <section id="faq" class="mb-5">
+                    <h2 class="border-bottom pb-2">Frequently Asked Questions</h2>
+                    
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeading1">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="true" aria-controls="faqCollapse1">
+                                    What is the difference between AMI agents and regular AI assistants?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse1" class="accordion-collapse collapse show" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    AMI agents are specialized AI assistants configured for specific domains or tasks. Unlike general-purpose AI assistants, AMI agents have tailored capabilities, knowledge bases, and behaviors that make them experts in their designated areas. They're designed to excel at particular functions rather than being broadly capable but less specialized.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeading2">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
+                                    Do I need programming experience to create an agent?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    No, the AMI Agent Creator is designed as a no-code platform that allows users without programming experience to create sophisticated AI agents. The user-friendly interface guides you through the process of selecting templates, configuring capabilities, and adjusting settings without requiring any coding knowledge.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeading3">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
+                                    Can I create multiple agents with different specializations?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes, you can create as many agents as you need, each with different specializations. This allows you to build a suite of purpose-specific agents rather than trying to make one agent handle everything. For example, you might have separate agents for medical coding review, customer support, and data analysis.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeading4">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">
+                                    What is the YAML configuration and why is it important?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    The YAML configuration is a structured text format that defines all aspects of your agent, including its capabilities, knowledge bases, and model settings. This configuration is important because it can be exported and imported into deployment platforms like Dify.ai, allowing you to move your agent from design to production. The YAML format serves as a standardized way to represent your agent's configuration.
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqHeading5">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse5" aria-expanded="false" aria-controls="faqCollapse5">
+                                    How do I choose the right model settings for my agent?
+                                </button>
+                            </h2>
+                            <div id="faqCollapse5" class="accordion-collapse collapse" aria-labelledby="faqHeading5" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <p>Choosing the right model settings depends on your agent's purpose:</p>
+                                    <ul>
+                                        <li><strong>Model type</strong>: Choose LLM for conversational agents, Text Embedding for semantic search, and Rerank for prioritizing search results.</li>
+                                        <li><strong>Base model</strong>: Use more powerful models (Claude 3 Opus, GPT-4) for complex reasoning, and lighter models (Claude 3 Haiku, GPT-3.5) for simpler tasks.</li>
+                                        <li><strong>Temperature</strong>: Set lower (0.0-0.4) for factual accuracy in tasks like medical coding or data analysis, and higher (0.6-0.9) for creative tasks.</li>
+                                        <li><strong>Context size</strong>: Consider the length of typical inputs and ensure the context size is sufficient.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">© 2025 Ailevate, Inc. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-decoration-none text-secondary me-3">Privacy Policy</a>
+                    <a href="#" class="text-decoration-none text-secondary me-3">Terms of Service</a>
+                    <a href="#" class="text-decoration-none text-secondary">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
